@@ -13,6 +13,7 @@ var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
 var nodemailer = require('nodemailer');
 
+
 var indexRouter = require('./routes/index');
 var userRoute = require('./routes/user');
 var adminRoute = require('./routes/admin');
