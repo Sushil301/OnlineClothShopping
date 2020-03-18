@@ -91,4 +91,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-//https://github.com/Sushil301/OnlineClothShopping.git
