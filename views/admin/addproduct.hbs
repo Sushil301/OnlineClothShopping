@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from wpkixx.com/html/wooble/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2020 06:34:01 GMT -->
+
+<body>
+<!-- Start Page Loading -->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+<div class="panel-layout">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="main-page">
+          <div class="main-content">
+            <!-- responsive header -->
+            <div class="panel-body">
+              
+              <div class="content-area">
+                
+                <div class="gap no-gap" style="text-align: center;">
+                    <div class="inner-bg">
+                      <div class="element-title">
+                        <h4>Add product</h4>
+                        
+                        <form action="/admin/addproduct" method="POST" enctype="multipart/form-data">
+                        <table style="margin-left: 550px;">
+                            <tr>
+                                <th>Product Name : </th>
+                                <td> <input class="form-control" type="text" name="productName" placeholder=""></td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Category : </label></th>
+                                <td> <select class="form-control" name="productType">
+                                  <option value="">Slect Option</option>
+                                  <option value="kurti">Kurti</option>
+                                  <option value="grown">Grown</option>
+                                  </select></td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Size : </label></th>
+                                <td>
+							    <input type="radio" value="M" name="size">
+                                <label>M</label>
+							   
+                                <input type="radio" name="size" value="L">
+    						    <label>L</label>
+
+							    <input type="radio" name="size" value="XL">
+                            	<label>XL</label>
+
+							    <input type="radio" name="size" value="XXL">
+                                <label>XXL</label>
+
+                              </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Price : </label></th>
+                                <td>
+								    <input class="form-control" name="price" placeholder="" type="number" min="0">
+                                </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Description : </label></th>
+                                <td>
+                                     <textarea cols="30" class="form-control" required='required' name="description" rows="1" placeholder=""></textarea>
+                                </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>upload image : </label></th>
+                                <td>
+								    <input class="form-control" type="file" name="productImage" accept="image/*"/>
+                                </td>
+                            </tr>
+                        </table>
+							{{!-- <div class="col-md-6">
+							  <div class="input-group">
+								<label>discount</label>
+								<span class="input-group-addon"><i class="fa fa-percent"></i></span>
+								<input class="form-control" name="email" placeholder="5%" type="text">
+							  </div>
+							</div> --}}
+							
+							{{!-- <div class="col-md-6">
+							  <label>type</label>
+							  <input type="text" placeholder="leather">
+							</div>
+							<div class="col-md-6">
+							  <label>style</label>
+							  <select>
+								<option value="">Slect Option</option>
+								<option value="">option one</option>
+								<option value="">option two</option>
+								<option value="">option three</option>
+								<option value="">option four</option>
+								<option value="">option five</option>
+							  </select>
+							</div> --}}
+                            <br>
+							<div class="cform-wrapper">
+							  <div class="buttonz">
+								<button type="submit" class="btn-st rd-30" name="save">save</button>
+								<button type="submit" class="btn-st rd-30" name="cancel">cancel</button>
+							  </div>
+							</div>
+                    
+                        </form>
+
+                    </div>
+                </div>
+              </div>          
+              <!-- bottombar --> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+<!-- Mirrored from wpkixx.com/html/wooble/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2020 06:34:07 GMT -->
+</html>

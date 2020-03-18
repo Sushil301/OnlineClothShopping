@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <style>
+            .gallery {
+-webkit-column-count: 3;
+-moz-column-count: 3;
+column-count: 3;
+-webkit-column-width: 33%;
+-moz-column-width: 33%;
+column-width: 33%; }
+.gallery .pics {
+-webkit-transition: all 350ms ease;
+transition: all 350ms ease; }
+.gallery .animation {
+-webkit-transform: scale(1);
+-ms-transform: scale(1);
+transform: scale(1); }
+
+@media (max-width: 450px) {
+.gallery {
+-webkit-column-count: 1;
+-moz-column-count: 1;
+column-count: 1;
+-webkit-column-width: 100%;
+-moz-column-width: 100%;
+column-width: 100%;
+}
+}
+
+@media (max-width: 400px) {
+.btn.filter {
+padding-left: 1.1rem;
+padding-right: 1.1rem;
+}
+}
+        </style>
+    </head>
+    <body><!-- Grid row -->
+<div class="row">
+
+  <!-- Grid column -->
+  <div class="col-md-12 d-flex justify-content-center mb-5" style="margin-left: 280px;">
+
+    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
+    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Gown</button>
+    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Indo Western</button>
+    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="3">Jeans & t-shirt</button>
+
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+
+<!-- Grid row -->
+<div class="gallery" id="gallery" style="margin-top: 10px;">
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w2.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 1">
+    <img class="img-fluid" src="/images/w4.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 1">
+    <img class="img-fluid" src="/images/w6.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w3.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w5.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w7.jpg" alt="Card image cap">
+  </div>
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w8.jpg" alt="Card image cap">
+  </div>
+  <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w9.jpg" alt="Card image cap">
+  </div>
+    <div class="mb-3 pics animation all 2">
+    <img class="img-fluid" src="/images/w10.jpg" alt="Card image cap">
+  </div>
+  <div class="mb-3 pics animation all 3">
+    <img class="img-fluid" src="/images/jt1.jpg" alt="Card image cap">
+  </div>
+  <div class="mb-3 pics animation all 3">
+    <img class="img-fluid" src="/images/j2.jpg" alt="Card image cap">
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+<script>
+    $(function() {
+var selectedClass = "";
+$(".filter").click(function(){
+selectedClass = $(this).attr("data-rel");
+$("#gallery").fadeTo(100, 0.1);
+$("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
+setTimeout(function() {
+$("."+selectedClass).fadeIn().addClass('animation');
+$("#gallery").fadeTo(300, 1);
+}, 300);
+});
+});
+</script>
+</body>
+</html>

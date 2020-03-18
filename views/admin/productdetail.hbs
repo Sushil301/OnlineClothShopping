@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from wpkixx.com/html/wooble/product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2020 06:34:01 GMT -->
+
+<body>
+<!-- Start Page Loading -->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+<div class="panel-layout">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="main-page">
+          
+                        <!-- side header -->
+                       
+          <div class="main-content">
+            
+            <div class="responsive-header">
+                                
+                            </div>
+            <!-- responsive header -->
+            <div class="panel-body">
+              
+                <div class="gap no-gap">
+                  <div class="inner-bg">
+                    <div class="product-details">
+                      <div class="gap no-top">
+                        <div class="product-details-wrapper paddlr70">
+                          <div class="product-detail paddlr100">
+                            <div class="row">
+                             
+                                {{# if prodDetails }}
+                              <div class="col-lg-5 col-md-5">
+                                     {{log prodDetails.productImage}}
+                                <div class="product-detail-thumb"> <img src="/images/productImage/{{ prodDetails.productImage }}" alt="   {{log prodDetails.productImage}}"> </div>
+                              </div>
+                                <div class="product-detail-info">
+                                  <span><h1>{{ prodDetails.productName }}</h1></span>
+                                  <p>{{ this.description }}</p>
+                                  <span class="price"> <ins>${{ prodDetails.price }}</ins> <del>$210.00</del> </span>
+                                  
+                                      <label>Category:</label>
+                                      <h1>{{ prodDetails.productType }}</h1>
+                                      
+                                      <label>Size:</label>
+                                      <h1>{{ prodDetails.size }}</h1>
+                                </div>
+                                <a href="/admin/delete/{{ prodDetails._id }}" >Delete</a>
+                              {{/if}}
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                    <!-- Product Details --> 
+                  </div>
+                </div>
+              </div>
+             
+              <!-- bottombar --> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+<!-- Mirrored from wpkixx.com/html/wooble/product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 27 Feb 2020 06:34:01 GMT -->
+</html>

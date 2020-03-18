@@ -1,0 +1,172 @@
+{{!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
+<br>
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+         {{#if products }}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+
+                    <tr>
+                        <td class="col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://localhost:3000/{{this.item.productImage}}" style="width: 72px; height: 72px;"> </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#">{{this.item.productName}}</a></h4>
+                                <h5 class="media-heading"><a href="#">{{ this.item.ProductType}}</a></h5>
+                                <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
+                            </div>
+                        </div></td>
+                        <td class="col-md-1" style="text-align: center">
+                        <input type="number" class="form-control" id="exampleInputEmail1" value="{{ this.qty }}">
+                        </td>
+                        <td class="col-md-1 text-center"><strong>{{ this.item.price}} </strong></td>
+                        <td class="col-md-1 text-center"><strong>{{ this.price }}</strong></td>
+                        <td class="col-md-1">
+                            <a href="/remove/{{this.item._id}}" >Remove</a>
+                       </td>
+                    </tr>
+                    {{/each}}
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Subtotal</h5></td>
+                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h5>Estimated shipping</h5></td>
+                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td><h3>Total</h3></td>
+                        <td class="text-right"><h3><strong>{{ this.totalPrice }}</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>   </td>
+                        <td>
+                        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+                            <a href="/shop" type="button" class="glyphicon glyphicon-shopping-cart">Continue Shopping</a>
+                        </div>
+                       </td>
+                        <td>
+                        <button type="button" class="btn btn-success">
+                            Checkout <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+            {{else }}
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+                        <h2>No Items in Cart yet!</h2>
+                    </div>
+                </div>
+         {{/if}}
+
+        </div>
+    </div>
+{{!-- {{#if products }}
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <ul class="list-group">
+                {{#each products}}
+                    <li class="list-group-item">
+                        <img src="http://localhost:3000/{{this.item.productImage}}" class="img-circle" alt="{{this.item.productName}}" width="100" height="100"> 
+                        <span class="badge">{{this.qty}}</span>
+                        <span style="font-weight: bold">{{this.item.productName}}</span>
+                        
+                        <span class="label label-success">${{this.price}}</span>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/reduce/{{this.item._id}}">Reduce by 1</a></li>
+                                <li><a href="/remove/{{this.item._id}}">Remove All</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <strong>Total Price: {{totalPrice}}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+        </div>
+    </div>
+    {{else }}
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <h2>No Items in Cart yet!</h2>
+        </div>
+    </div>
+{{/if}} --}}
+    {{!-- <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <ul class="list-group">
+                {{#each products }} 
+                    <li class="list-group-item">
+                        <span class="badge">{{ this.qty }}</span>
+                        <strong>{{ this.item.title }}</strong>
+                        <span class="label label-success">${{ this.price }}</span>
+                        
+                            <button class="btn btn-primary btn-xs" type="button" data-toggle="dropdown">Action<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Reduce by 1</a></li>
+                                <li><a href="#">Remove All</a></li>
+                            </ul>
+
+                   </li>
+                {{/each}} 
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <strong>Total : {{totalPrice}}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+        </div>
+    </div>
+{{!-- {{else}} 
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <h2>No Item in Cart</h2>
+        </div>
+    </div>
+{{/if}} --}} 

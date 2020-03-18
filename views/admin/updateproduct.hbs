@@ -1,0 +1,8 @@
+
+<form method="POST" action="/admin/getdata">
+{{#if updateprodDetails}}
+    <input type="text" name="prodid" value="{{ updateprodDetails._id }}">
+    <input type="text" name="name" value="{{ updateprodDetails.productName }}">
+    <input type="submit" name="submit">
+{{/if}}
+</form>

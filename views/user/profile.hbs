@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>User Profile</h1>
+        {{log userprofile}}
+        {{#each userprofile}}
+
+        <form action="/user/editProfile" method="post">
+            <label for="first_name">First name</label>
+            <input type="text" id="firstName" value="{{this.fname}}" name="firstName" style="width: 300px;" class="form-control"><br>
+
+            <label for="last_name">Last name</label>
+            <input type="text" id="lastName" value="{{this.lname}}" name="lastName" style="width: 300px;"  class="form-control" ><br>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" value="{{this.email}}" name="email" style="width: 300px;"  class="form-control" readonly><br>
+
+            <input type="hidden" name="_id" value="{{this._id}}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+            <input type="submit" value="Update Profile">
+        </form>
+        {{/each}}
+        <hr>
+        <h2>My Orders</h2>
+        {{!-- {{#each orders}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    {{# each this.items}}
+                    <li class="list-group-itme">
+                        {{ this.item.title }} | {{ this.qty }} Units
+                        <span class="badge">${{ this.price}}</span>
+                        
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <strong> Total Price: ${{ this.cart.totalPrice }}</strong>
+            </div>
+        </div>
+        {{/each}} --}}
+        
+    </div>
+</div>

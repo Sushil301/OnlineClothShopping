@@ -1,0 +1,151 @@
+/*=========================
+	FONT COLOR
+=========================*/
+.responsive-menu ul li a:hover,
+.notify-area li i.fa-search,
+.bread-crumb li span,
+.side-menus nav > ul > li:hover > a,
+.side-menus nav > ul > li.menu-item-has-children > ul li a:hover,
+.side-menus nav > ul > li a:hover i,
+.side-menus nav > ul > li.active a, 
+.side-menus nav > ul > li.active:before, 
+.side-menus nav > ul > li.active i,
+.owner-info > span,
+.notifi-meta > h4:hover,
+.drop.setting .drop-meta > li a:hover,
+.drop.setting .drop-meta > li a:hover i,
+.drop.messages .notifi-meta > h4:hover,
+.view-more:hover,
+.mega-links > li a:hover,
+.new-pst-meta > span,
+.new-pst-meta > h4:hover,
+.due,
+.active-info > span,
+.active-info > h5:hover,
+.date,
+.recent .comment-date > li span,
+.bottombar ul li a:hover,
+.post-data > h4:hover,
+.sub-area ul li a:hover,
+.posted-by,
+.post-data > span,
+.rating-stars li,
+.paginationz > ul li.next a:hover,
+.paginationz > ul li.prev a:hover,
+.toggle-style1 .toggle-item > h3.active,
+.toggle-style3 .toggle-item > h3.active,
+.toggle-style4 .toggle-item > h3.active,  
+blockquote > p span i,
+.invoice-detail > h4 span,
+.some-about > li > i,
+.invoice-table table.prj-tbl tr td ins,
+.ptable-head > h4 i,
+.sndr-tckt > a:hover,
+.p-table-meta > ul > li i,
+.owl-prev:hover:before,
+.owl-next:hover:before,
+.tab-data > strong,
+.tab-data ul li span,
+.team-name > span,
+.rating1 > i,
+.rating2 > i,
+.rating4 > i,
+.info-meta > span,
+.event-detail span,
+.total > li span,
+.total-count li i,
+.mini-stats > p,
+.prj-tbl ul > li > a > i,
+.cirlce-chart-detail > ul li span,
+.rcnt-activt > ul > li span,
+.scl-wdgt > p i,
+.notifi-info > p > a,
+.rev-nam > span,
+.notifi-info > span a:hover,
+.email-box-nav > ul > li a:hover,
+.email-box-nav > ul > li a:hover i,
+.email-compos-opt > a:hover,
+.post-editing > span > a,
+.info5o5 > h1 > span,
+.info5o5 > p > a,
+.coming-meta > h1 > span,
+.countdown li p,
+.author-name span,
+.ok-price,
+.product-meta > h4 a:hover,
+.review-btn,
+.product-detail-info .price ins,
+.single-post-detail > ul li::before,
+.admin-form form > label[for="checkbox"] a,
+.admin-form form > label[for="remember"] > a,
+.admin-form span > a,
+/*--- support page --*/
+.menu > ul > li > a:hover,
+.news-info > h4 > a:hover,
+.project-title > a:hover,
+.bread-crumb > li a:hover,
+.mega-post-info > ul > li a:hover
+{
+	color: rgba(0, 0, 0, 0) linear-gradient(to right, #667eea 0%, #764ba2 100%) repeat scroll 0 0;	
+}
+/*=========================
+	BACKGROUND COLOR
+=========================*/
+
+.post-avatar > i,
+.default-form button.submit,
+.in-rates > li > b::before,
+.paginationz > ul li.active a,
+.paginationz > ul li a:hover,
+.prj-tbl > thead.color,
+.contact-us > ul li i,
+.contact-from .button,
+.action > button,
+.p-table-bottom > a:hover,
+.jalendar .jalendar-container .jalendar-pages .days .day.today span,
+.sngl-slct::before,
+.sndr-tckt > button,
+.price-table.active,
+.table-meta .main-btn,
+.table-hed,
+.p-table-meta.active .main-btn,
+.p-table-meta .main-btn:hover,
+.over-meta > a,
+.purchase-now,
+.social-media li > a:hover,
+.mini-stats > h3::before,
+.td-lst-hdr,
+.post-editing > ul > li > a:hover,
+.date-box,
+.bs-forms > form > .input-group span,
+.pagination > li.active > a,
+/*--- support page ---*/
+.theme-btn:hover,
+.help-feat-innr > form button,
+.suppot-policy-box > ul li:before,
+.load-more-btn > a:hover,
+.drop .drop-bottom:hover,
+.tab-style.style2 > ul li.active a,
+.topbar,
+.responsive-header,
+a.view-more:hover,
+.owl-prev:hover:before,
+.owl-next:hover:before
+{
+	background: rgba(0, 0, 0, 0) linear-gradient(to right, #667eea 0%, #764ba2 100%) repeat scroll 0 0;
+}
+
+
+/*=========================
+	BORDER COLOR
+=========================*/
+.main-menu > ul > li ul,
+.price-table:hover,
+.add-cart > li > a:hover,
+.pagination > li.active > a
+{
+	border-color:rgba(0, 0, 0, 0) linear-gradient(to right, #667eea 0%, #764ba2 100%) repeat scroll 0 0;	
+}
+.mega-menu{
+	border-bottom-color: rgba(0, 0, 0, 0) linear-gradient(to right, #667eea 0%, #764ba2 100%) repeat scroll 0 0;	
+}
