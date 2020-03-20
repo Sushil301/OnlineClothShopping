@@ -3,13 +3,62 @@ var router = express.Router();
 var Product = require('../models/product');
 var Cart = require('../models/cart');
 var session = require('express-session');
-
+var user = require('../models/user');
 var Order = require('../models/order');
+var nodemailer = require('nodemailer');
+
 
 router.use(function (req, res, next) {
     res.locals.login = req.isAuthenticated();
     next();
 });
+router.post('/editProfile',isLoggedIn, function(req, res, next) { 
+    if(req.body.updateprofile){
+        user.findByIdAndUpdate(req.body._id, req.body,{new:true}, (err, doc) => {
+            if (!err) {
+            //  console.log('updated');
+                res.redirect('/');
+            }
+            else{
+            console.log(err);
+            }
+        })
+    }
+    if(req.body.changepassword){
+        var rand,mailOptions,host,link;
+
+        var smtpTransport = nodemailer.createTransport({
+            service: "Gmail",
+            auth: {
+                user: "sushil30198@gmail.com",
+                pass: "Sushilr0066"
+            }
+          });
+
+        rand=Math.floor((Math.random() * 100) + 54);
+        req.session.rand = rand;
+        host=req.get('host');
+        link="http://"+req.get('host')+"/changepassword?id="+rand;
+        req.session.changeemail = req.body.email;
+
+        mailOptions={
+          to : req.body.email,
+          subject : "Change Password",
+          html : "Hello,<br> Please Click on the link to Change your Password.<br><a href="+link+">Click here to verify</a>"
+        }
+        console.log(mailOptions);
+        smtpTransport.sendMail(mailOptions, function(error, response){
+            if(error){
+                console.log(error);
+                 res.end("error");
+            }else{
+                console.log("Message sent: " + response.message);
+               // res.end("sent");
+                res.render('shop/index',{title:'express'});
+            }
+        });
+    }
+ });
 
 router.get('/', function (req, res, next) {
     var successMsg = req.flash('success')[0];
@@ -79,19 +128,19 @@ router.get('/shop', function (req, res, next) {
     })
 });
 
-var rand,mailOptions,host,link;
 
 router.get('/verify',function(req,res){
    
     console.log(req.session.rand);
     if(req.query.id == req.session.rand){
-        console.log('Verify');
+        console.log('verify');
         res.render('shop/index',{ title: 'CMS'});
     }
     else{
         console.log('Email not verify');
     }
 });
+
 
 router.get('/shopping-cart', function (req, res, next) {
     if (!req.session.cart) {
@@ -147,6 +196,23 @@ router.post('/checkout', isLoggedIn,function(req, res, next){
     });
 });
 
+router.get('/changepassword',function(req,res){
+   
+    console.log(req.session.rand);
+    if(req.query.id == req.session.rand){
+        console.log('changepassword');
+        res.render('user/changepassword',{ title: 'CMS'});
+    }
+    else{
+        console.log('Email not verify');
+    }
+});
+
+router.post('/newpassword', function(res,req){
+  
+      console.log("Hello" + req.body.newpass);
+  
+  });
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()){

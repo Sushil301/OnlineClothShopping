@@ -142,7 +142,7 @@ router.post('/getdata', auth.isAdmin, function(req, res, next) {
    console.log(req.body.name);
 
 
-   Product.findByIdAndUpdate(req.body.prodid, {$set: {"productName": req.body.name }}, (err, doc) => {
+   Product.findByIdAndUpdate(req.body.prodid, req.body,{new:true}, (err, doc) => {
        if (!err) {
           //  console.log('updated');
            res.redirect('/admin/product');

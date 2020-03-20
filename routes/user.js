@@ -22,12 +22,14 @@ router.get('/profile', isLoggedIn, function(req, res, next){
   user.find({'email': req.session.emailid} , function(err, userprof){
 
     if(!err){
-      res.render('user/profile', {csrfToken: req.csrfToken(), userprofile: userprof});
+      res.render('user/profile', { userprofile: userprof});
     }
     else{
       console.log("Error : "+ err);
     }
   });
+
+  
   // Order.find({user: req.user}, function(err, orders){
   //   if (err){
   //     return res.write('Error!');
@@ -91,6 +93,8 @@ router.get('/signup', function(req, res, next){
 
 
 
+
+
 function isLoggedIn(req, res, next){
   if (req.isAuthenticated()){
     return next();
@@ -101,8 +105,8 @@ function notLoggedIn(req, res, next){
       if (!req.isAuthenticated()){
           return next();
       }
-      res.redirect('/');
-  }
+    res.redirect('/');
+}
 
   module.exports = router;
 

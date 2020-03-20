@@ -1,8 +1,79 @@
+ <form action="/admin/getdata" method="POST" >
+                        {{#if updateprodDetails}}
+                                <input type="hidden" name="prodid" value="{{ updateprodDetails._id }}">
 
-<form method="POST" action="/admin/getdata">
+                        <table style="margin-left: 550px;">
+                            
+                            <tr>
+                                <th>Product Name : </th>
+                                <td> <input class="form-control" type="text" name="name" value="{{ updateprodDetails.productName }}" placeholder=""></td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Category : </label></th>
+                                <td> <select class="form-control" name="productType">
+                                  <option value="">Slect Option</option>
+                                  <option value="kurti" selected>Kurti</option>
+                                  <option value="grown">Grown</option>
+                                  </select></td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Size : </label></th>
+                                <td>
+							    <input type="radio" value="M" name="size">
+                                <label>M</label>
+							   
+                                <input type="radio" name="size" value="L">
+    						    <label>L</label>
+
+							    <input type="radio" name="size" value="XL">
+                            	<label>XL</label>
+
+							    <input type="radio" name="size" value="XXL">
+                                <label>XXL</label>
+
+                              </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Price : </label></th>
+                                <td>
+								    <input class="form-control" name="price" value="{{ updateprodDetails.price }}" placeholder="" type="number" min="0">
+                                </td>
+                            </tr>
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>Description : </label></th>
+                                <td>
+                                     <textarea cols="30" class="form-control" required='required' name="description" rows="1" placeholder=""></textarea>
+                                </td>
+                            </tr>
+                            {{!-- <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>upload image : </label></th>
+                                <td>
+								    <input class="form-control" type="file" name="productImage" accept="image/*"/>
+                                </td>
+                            </tr> --}}
+                            <tr><td><br></td></tr>
+                             <tr>
+                                <th><label>upload image : </label></th>
+                                <td>
+								    	<button type="submit" class="btn-st rd-30" name="update">Update</button>
+								<button type="submit" class="btn-st rd-30" name="cancel">cancel</button>
+                                </td>
+                            </tr>
+                        </table>
+                        {{/if}}
+  </form>
+
+
+
+{{!-- <form method="POST" action="/admin/getdata">
 {{#if updateprodDetails}}
-    <input type="text" name="prodid" value="{{ updateprodDetails._id }}">
+    <input type="hidden" name="prodid" value="{{ updateprodDetails._id }}">
     <input type="text" name="name" value="{{ updateprodDetails.productName }}">
     <input type="submit" name="submit">
 {{/if}}
-</form>
+</form> --}}
