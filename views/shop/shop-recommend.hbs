@@ -119,11 +119,10 @@
                                 </div>
                                 <div class="categories-list">
                                     <ul>
-                                        <li><a href="#" class="active"><span><i class="fa fa-anchor"></i></span>Lifestyle Brand</a></li>
-                                        <li><a href="#"><span><i class="fa fa-gavel"></i></span>Premium Stores</a></li>
-                                        <li><a href="#"><span><i class="fa fa-rocket"></i></span>Thematic Stores</a></li>
-                                        <li><a href="#"><span><i class="fa fa-bolt"></i></span>Originals</a></li>
-                                        <li><a href="#"><span><i class="fa fa-bullhorn"></i></span>Exclusive Brands</a></li>
+                                        {{#each categorydetails }}
+                                        <li><a href="#"><span><i class="fa fa-anchor"></i></span>{{ this.categoryName }}</a></li>
+                                      
+                                        {{/each}}
                                     </ul>
                                 </div>
                             </div>
@@ -186,9 +185,15 @@
                                             <span class="offr">20%</span>
                                             <img style="height: 300px;width: 350px" src="/images/productImage/{{ this.productImage }}" alt="{{ this.productImage }}"/>
                                             <ul>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="flaticon-repeat"></i></a></li>
-                                                <li><a href="/add-to-cart/{{this._id}}"><i class="flaticon-shopping-cart"></i></a></li>
+                                                {{#if currentUser.isAdmin}}
+                                                 <li><a href="/admin/delete/{{ this._id }}"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                                <li><a href="/admin/update/{{ this._id }}"><i class="fa fa-edit"></i></a></li>
+                                                {{else}}
+                                                 <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                 <li><a href="#"><i class="flaticon-repeat"></i></a></li>
+                                                 <li><a href="/add-to-cart/{{this._id}}"><i class="flaticon-shopping-cart"></i></a></li>
+                                                {{/if}}
+                                               
                                             </ul>
                                         </figure>
                                         <div class="content">

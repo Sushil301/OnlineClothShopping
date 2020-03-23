@@ -12,12 +12,26 @@ var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
 var session = require('express-session');
 
+var category = require('../models/category');
+
 
 var url = 'mongodb://localhost:27017/OCM';
 
 
 router.get('/addproduct', auth.isAdmin ,function(req, res, next) {
-   res.render('admin/addproduct');
+
+  category.find((err,docs)=>{
+    if(!err)
+    {
+      res.render("admin/addproduct", {
+       categorydetails:docs
+      });
+    }
+    else
+    {
+      console.log('Error in retriving data :'+ err);
+    }
+  });
 });
 
  
@@ -62,13 +76,24 @@ router.get('/addproduct', auth.isAdmin ,function(req, res, next) {
    Product.find((err,docs)=>{
      if(!err)
      {
-       res.render("admin/product", {
-         list:docs
-       });
+      category.find((err,categorydocs)=>{
+        if(!err)
+        {
+          
+          res.render("admin/product", {
+            list:docs ,
+            categorydetails:categorydocs
+          });
+        }
+        else
+        {
+          console.log('Error in retriving category data :'+ err);
+        }
+      });
      }
      else
      {
-       console.log('Error in retriving data :'+ err);
+       console.log('Error in retriving product data :'+ err);
      }
    });
  });
@@ -96,7 +121,7 @@ router.get('/delete/:id',auth.isAdmin , (req,res)=>{
    Product.findByIdAndRemove(req.params.id, (err,docs)=>{
      if(!err)
      {
-       res.redirect("/admin/viewproduct");
+       res.redirect("/admin/product");
      }
      else
      {
@@ -152,4 +177,54 @@ router.post('/getdata', auth.isAdmin, function(req, res, next) {
        }
    })
 });
+
+router.get('/addcategory', auth.isAdmin ,function(req, res, next) {
+  res.render('admin/addcategory');
+});
+
+router.post('/addcategory',auth.isAdmin,function(req,res,next){
+  insertCategory(req,res);
+});
+
+function insertCategory(req,res ){
+  var cate = new category();
+  cate.categoryName = req.body.categoryName;
+  cate.save((err,docs)=>{
+    if(!err){
+      res.render('shop/index', { title: 'Product Added' });
+      console.log('Inserted');
+    }
+    else{
+      console.log('Error');
+    }
+  });
+}
+
+router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
+ console.log("Hello" + req.params.name );
+ Product.find({}).where('productType').equals(req.params.name).then( docs=>{
+  if(docs)
+  {
+   category.find((err,categorydocs)=>{
+     if(!err)
+     {
+       res.render("admin/product", {
+         list:docs ,
+         categorydetails:categorydocs
+       });
+     }
+     else
+     {
+       console.log('Error in retriving category data :'+ err);
+     }
+   });
+  }
+  else
+  {
+    console.log('Error in retriving product data :'+ err);
+  }
+});
+});
+
+
 module.exports = router;

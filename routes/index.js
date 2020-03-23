@@ -5,6 +5,7 @@ var Cart = require('../models/cart');
 var session = require('express-session');
 var user = require('../models/user');
 var Order = require('../models/order');
+var category = require('../models/category');
 var nodemailer = require('nodemailer');
 
 
@@ -120,7 +121,20 @@ router.get('/aboutus', function (req, res, next) {
 router.get('/shop', function (req, res, next) {
     Product.find((err,docs) => {
         if(!err){
-            res.render('shop/shop-recommend', {list: docs});
+            category.find((err,categorydocs)=>{
+                if(!err)
+                {
+                  
+                  res.render("shop/shop-recommend", {
+                    list:docs ,
+                    categorydetails:categorydocs
+                  });
+                }
+                else
+                {
+                  console.log('Error in retriving category data :'+ err);
+                }
+              });
         }
         else{
             console.log('error '+err);
@@ -198,9 +212,9 @@ router.post('/checkout', isLoggedIn,function(req, res, next){
 
 router.get('/changepassword',function(req,res){
    
-    console.log(req.session.rand);
+    //console.log(req.session.rand);
     if(req.query.id == req.session.rand){
-        console.log('changepassword');
+       // console.log('changepassword');
         res.render('user/changepassword',{ title: 'CMS'});
     }
     else{
@@ -210,7 +224,7 @@ router.get('/changepassword',function(req,res){
 
 router.post('/newpassword', function(res,req){
   
-      console.log("Hello" + req.body.newpass);
+      console.log("Hello" +req.body.confirmpassword );
   
   });
 

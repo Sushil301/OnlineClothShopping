@@ -36,25 +36,25 @@
                              <tr>
                                 <th><label>Category : </label></th>
                                 <td> <select class="form-control" name="productType">
-                                  <option value="">Slect Option</option>
-                                  <option value="kurti">Kurti</option>
-                                  <option value="grown">Grown</option>
+                                  {{#each categorydetails }}
+                                  <option value="{{ this._id }}">{{ this.categoryName }}</option>
+                                  {{/each}}
                                   </select></td>
                             </tr>
                             <tr><td><br></td></tr>
                              <tr>
                                 <th><label>Size : </label></th>
                                 <td>
-							    <input type="radio" value="M" name="size">
+							                     <input type="radio" value="M" name="size">
                                 <label>M</label>
 							   
                                 <input type="radio" name="size" value="L">
-    						    <label>L</label>
+    						                 <label>L</label>
 
-							    <input type="radio" name="size" value="XL">
-                            	<label>XL</label>
+							                    <input type="radio" name="size" value="XL">
+                              	<label>XL</label>
 
-							    <input type="radio" name="size" value="XXL">
+							                  <input type="radio" name="size" value="XXL">
                                 <label>XXL</label>
 
                               </td>

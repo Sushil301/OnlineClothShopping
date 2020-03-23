@@ -3,6 +3,7 @@ module.exports = {
         if (req.user) {
             currentUser = req.user;   
             if(currentUser.isAdmin) {
+                req.session.currentUser = currentUser.isAdmin;
                 return next();
             }
             else {
@@ -13,4 +14,4 @@ module.exports = {
             res.redirect('/user/signin');
         }
     }
-}
+} 

@@ -90,11 +90,6 @@ router.get('/signup', function(req, res, next){
       res.redirect('user/profile');
     }
   });
-
-
-
-
-
 function isLoggedIn(req, res, next){
   if (req.isAuthenticated()){
     return next();
@@ -108,7 +103,7 @@ function notLoggedIn(req, res, next){
     res.redirect('/');
 }
 
-  module.exports = router;
+module.exports = router;
 
 //   function isLoggedIn(req, res, next) {
 //     if (req.isAuthenticated()) {
