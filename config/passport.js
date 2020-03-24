@@ -63,7 +63,6 @@ passport.use('local.signup', new LocalStrategy({
                 }
                 rand=Math.floor((Math.random() * 100) + 54);
                 req.session.rand = rand;
-                console.log('hello');
                 host=req.get('host');
                 link="http://"+req.get('host')+"/verify?id="+rand;
 

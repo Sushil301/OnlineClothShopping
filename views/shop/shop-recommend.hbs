@@ -120,7 +120,7 @@
                                 <div class="categories-list">
                                     <ul>
                                         {{#each categorydetails }}
-                                        <li><a href="#"><span><i class="fa fa-anchor"></i></span>{{ this.categoryName }}</a></li>
+                                        <li><a href="/categorywiseproduct/{{ this.categoryName }}"><span><i class="fa fa-anchor"></i></span>{{ this.categoryName }}</a></li>
                                       
                                         {{/each}}
                                     </ul>
@@ -165,14 +165,20 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="pro-file">
-                                <a href="#" class="btn1"><i class="fa fa-retweet pd-r5 f-16"></i>compare</a>
+                             <div class="pro-file">
                                 <div class="filtersd">
-                                    <select>
-                                        <option> SORT BY LATEST ITEM</option>
-                                        <option> new ITEM</option>
-                                        <option> featured ITEM</option>
-                                    </select>
+                                    
+                                    <form id="tableForm" action="/getSortData" method="POST">
+                                        <select class="selectpicker" data-style="btn-info" name="selectSortpicker">
+                                            
+                                                <option value=""> SORT BY LATEST ITEM</option>
+                                                <option value=""> new ITEM</option>
+                                                <option value="lth">Price Low to High</option>
+                                                <option value="htl">Price High to Low</option>
+                                            
+                                        </select>
+                                        <input type="submit" value="check" />
+                                    </form>
                                 </div>
                             </div>
                         </div>

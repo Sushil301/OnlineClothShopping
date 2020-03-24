@@ -60,7 +60,7 @@ router.post('/editProfile',isLoggedIn, function(req, res, next) {
         });
     }
  });
-
+ 
 router.get('/', function (req, res, next) {
     var successMsg = req.flash('success')[0];
     Product.find(function (err, docs) {
@@ -142,7 +142,71 @@ router.get('/shop', function (req, res, next) {
     })
 });
 
-
+router.get('/categorywiseproduct/:name', function(req, res, next) {
+    Product.find({}).where('productType').equals(req.params.name).then( docs=>{
+     if(docs)
+     {
+      category.find((err,categorydocs)=>{
+        if(!err)
+        {
+          res.render("shop/shop-recommend", {
+            list:docs ,
+            categorydetails:categorydocs
+          });
+        }
+        else
+        {
+          console.log('Error in retriving category data :'+ err);
+        }
+      });
+     }
+     else
+     {
+       console.log('Error in retriving product data :'+ err);
+     }
+   });
+});
+router.post('/getSortData',function(req,res,next){
+    var querydata = req.body.selectSortpicker;
+    console.log("Heloo "+ req.body.selectSortpicker);
+    if(querydata == "htl"){
+        Product.find({}).sort({price : -1}).then(docs => {
+                category.find((err,categorydocs)=>{
+                    if(!err)
+                    {
+                    
+                    res.render("shop/shop-recommend", {
+                        list:docs ,
+                        categorydetails:categorydocs
+                    });
+                    }
+                    else
+                    {
+                    console.log('Error in retriving category data :'+ err);
+                    }
+                });
+        })
+    }
+    if(querydata == "lth"){
+        Product.find({}).sort({price : 1}).then(docs => {
+                category.find((err,categorydocs)=>{
+                    if(!err)
+                    {
+                    
+                    res.render("shop/shop-recommend", {
+                        list:docs ,
+                        categorydetails:categorydocs
+                    });
+                    }
+                    else
+                    {
+                    console.log('Error in retriving category data :'+ err);
+                    }
+                });
+        })
+    }
+    
+  });
 router.get('/verify',function(req,res){
    
     console.log(req.session.rand);
@@ -209,6 +273,8 @@ router.post('/checkout', isLoggedIn,function(req, res, next){
         });
     });
 });
+
+
 
 router.get('/changepassword',function(req,res){
    

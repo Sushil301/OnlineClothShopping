@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="pro-size">
                                     <ul class="list-inline">
-                                        <li class="active"><span>m</span></li>
+                                        <li><span>m</span></li>
                                         <li><span>s</span></li>
                                         <li><span>l</span></li>
                                         <li><span>xl</span></li>
@@ -136,20 +136,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="widget">
-                                <div class="heading">
-                                    <h4>Price range</h4>
-                                </div>
-                                <div class="price-range">
-                                    <div class="range">
-                                        <div id="range-price" class="range-box"></div>
-                                        <span>Range :</span><input type="text" id="price" class="price-box" readonly/>
-                                    </div>
-                                    <button type="submit">FILTER</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
+                    
                     <div class="col-md-9 col-sm-12 pd-0">
                         <div class="col-sm-12">
                             <div class="pro-filter">
@@ -159,21 +149,30 @@
                                         <li><a href="#" id="gridview"><i class="fa fa-th"></i></a></li>
                                         <li><a href="#" id="listview"><i class="fa fa-list"></i></a></li>
                                     </ul>
+                                    
                                 </div>
                             </div>
                             <div class="pro-file">
-                                <a href="#" class="btn1"><i class="fa fa-retweet pd-r5 f-16"></i>compare</a>
                                 <div class="filtersd">
-                                    <select>
-                                        <option> SORT BY LATEST ITEM</option>
-                                        <option> new ITEM</option>
-                                        <option> featured ITEM</option>
-                                    </select>
+                                    
+                                    <form id="tableForm" action="/admin/getSortData" method="POST">
+                                        <select class="selectpicker" data-style="btn-info" name="selectSortpicker">
+                                            
+                                                <option value=""> SORT BY LATEST ITEM</option>
+                                                <option value=""> new ITEM</option>
+                                                <option value="lth">Price Low to High</option>
+                                                <option value="htl">Price High to Low</option>
+                                            
+                                        </select>
+                                        <input type="submit" value="check" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm-12">
                             <div id="products" class="row">
+                                <br>
                                 {{# each list}}
                                 <div class="item col-md-4 col-sm-6 col-xs-12">
                                     <div class="product-list">

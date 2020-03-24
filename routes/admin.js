@@ -201,7 +201,6 @@ function insertCategory(req,res ){
 }
 
 router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
- console.log("Hello" + req.params.name );
  Product.find({}).where('productType').equals(req.params.name).then( docs=>{
   if(docs)
   {
@@ -226,5 +225,47 @@ router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
 });
 });
 
+
+router.post('/getSortData',function(req,res,next){
+  var querydata = req.body.selectSortpicker;
+  console.log("Heloo "+ req.body.selectSortpicker);
+  if(querydata == "htl"){
+      Product.find({}).sort({price : -1}).then(docs => {
+              category.find((err,categorydocs)=>{
+                  if(!err)
+                  {
+                  
+                  res.render("admin/product", {
+                      list:docs ,
+                      categorydetails:categorydocs
+                  });
+                  }
+                  else
+                  {
+                  console.log('Error in retriving category data :'+ err);
+                  }
+              });
+      })
+  }
+  if(querydata == "lth"){
+      Product.find({}).sort({price : 1}).then(docs => {
+              category.find((err,categorydocs)=>{
+                  if(!err)
+                  {
+                  
+                  res.render("admin/product", {
+                      list:docs ,
+                      categorydetails:categorydocs
+                  });
+                  }
+                  else
+                  {
+                  console.log('Error in retriving category data :'+ err);
+                  }
+              });
+      })
+  }
+  
+});
 
 module.exports = router;
