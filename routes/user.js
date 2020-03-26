@@ -90,6 +90,8 @@ router.get('/signup', function(req, res, next){
       res.redirect('user/profile');
     }
   });
+
+
 function isLoggedIn(req, res, next){
   if (req.isAuthenticated()){
     return next();

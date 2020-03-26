@@ -7,6 +7,8 @@ var user = require('../models/user');
 var Order = require('../models/order');
 var category = require('../models/category');
 var nodemailer = require('nodemailer');
+var bcrypt = require('bcrypt-nodejs');
+
 
 
 router.use(function (req, res, next) {
@@ -26,41 +28,49 @@ router.post('/editProfile',isLoggedIn, function(req, res, next) {
         })
     }
     if(req.body.changepassword){
-        var rand,mailOptions,host,link;
-
-        var smtpTransport = nodemailer.createTransport({
-            service: "Gmail",
-            auth: {
-                user: "sushil30198@gmail.com",
-                pass: "Sushilr0066"
-            }
-          });
-
-        rand=Math.floor((Math.random() * 100) + 54);
-        req.session.rand = rand;
-        host=req.get('host');
-        link="http://"+req.get('host')+"/changepassword?id="+rand;
-        req.session.changeemail = req.body.email;
-
-        mailOptions={
-          to : req.body.email,
-          subject : "Change Password",
-          html : "Hello,<br> Please Click on the link to Change your Password.<br><a href="+link+">Click here to verify</a>"
-        }
-        console.log(mailOptions);
-        smtpTransport.sendMail(mailOptions, function(error, response){
-            if(error){
-                console.log(error);
-                 res.end("error");
-            }else{
-                console.log("Message sent: " + response.message);
-               // res.end("sent");
-                res.render('shop/index',{title:'express'});
-            }
-        });
+    
+       res.render('user/changepassword',{title:"chancepassword"});
     }
  });
- 
+ router.post('/changepassword',isLoggedIn, function(req, res, next) { 
+    if(req.body.btnchangepass){
+        var id = req.user._id;
+        var pass= req.body.curPass;
+        var newPass = req.body.newPass;
+        var confPass = req.body.confPass;
+        if(newPass == confPass){
+            user.findOne({_id : id}, function(err,doc){
+                if(err) throw err;
+                if(doc) {
+                    if(curHashPass = bcrypt.compareSync(pass, doc.password)) {
+                        user.updateOne( { _id: id }, { $set: {password: bcrypt.hashSync(newPass, bcrypt.genSaltSync(5), null) } }, function(err,req, res) {
+                            if (err) 
+                            res.render('user/changePassword',{errMsg : "Error in updating password " + err});
+                            else {
+                                console.log("Password Updated"); 
+                                delete req.session;  
+                            }                 
+                        });
+                        req.logout();
+                        res.redirect('/');
+                    }             
+                    else{
+                        res.render('user/changePassword',{errMsg : "Current Password Doesn't Match"});
+                    }      
+                }
+            });
+        }
+        else{
+            console.log("Password not match");
+        }
+        
+    }
+    if(req.body.btncancel){
+        res.render('/editProfile');
+
+    }
+ });
+
 router.get('/', function (req, res, next) {
     var successMsg = req.flash('success')[0];
     Product.find(function (err, docs) {
@@ -275,24 +285,6 @@ router.post('/checkout', isLoggedIn,function(req, res, next){
 });
 
 
-
-router.get('/changepassword',function(req,res){
-   
-    //console.log(req.session.rand);
-    if(req.query.id == req.session.rand){
-       // console.log('changepassword');
-        res.render('user/changepassword',{ title: 'CMS'});
-    }
-    else{
-        console.log('Email not verify');
-    }
-});
-
-router.post('/newpassword', function(res,req){
-  
-      console.log("Hello" +req.body.confirmpassword );
-  
-  });
 
 function isLoggedIn(req, res, next){
     if (req.isAuthenticated()){
