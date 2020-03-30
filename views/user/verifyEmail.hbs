@@ -1,0 +1,11 @@
+<div class="wrapper">
+	<div class="inner">      
+        <form action="/user/verifyEmail" method="POST">
+            <label for="name">Registered Email Address</label>
+            <input type="email" placeholder="Enter redistred Email Id" name="regEmail"  class="form-control"><br>
+                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+            <input type="submit" value="Verify Email">
+        </form>
+    </div>
+</div>

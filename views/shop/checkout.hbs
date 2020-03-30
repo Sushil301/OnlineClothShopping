@@ -1,5 +1,269 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <script>
+        function validateForm() {
+            
+            var fname = document.forms["myForm"]["fname"].value;
+            var lname = document.forms["myForm"]["lname"].value;    
+            var address = document.forms["myForm"]["address"].value;   
+            var zipcode = document.forms["myForm"]["zipcode"].value;    
 
-<div class="wrapper">
+
+            if (fname == "" && lname == "" && address == "" ) {
+                alert("Please Field this details")
+               
+                return false;
+            }
+            if( document.myForm.zipcode.value == "" || isNaN( document.myForm.zipcode.value ) ||
+            document.myForm.zipcode.value.length != 6 ) {
+            
+            alert( "Please provide a zip in the format #####." );
+            document.myForm.zipcode.focus() ;
+            return false;
+         }
+        }
+</script>
+    </head>
+  <body class="bg-light">
+        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+            {{errMsg}}
+        </div>
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2>Checkout form</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill fa fa-shopping-cart">{{session.cart.totalQty}}</span>
+          </h4>
+          {{#if product}}
+            {{#each product}}
+
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">{{this.item.productName}}</h6>
+                <small class="text-muted">{{ this.item.productType}}</small>
+              </div>
+              <span class="text-muted">{{ this.item.price}}</span>
+            </li>
+          {{/each}}
+          <li class="list-group-item d-flex justify-content-between">
+              <span>Total (INR): </span>
+              <strong> {{ this.totalPrice }}</strong>
+            </li>
+         
+         {{/if}}
+            
+          </ul>
+          
+          
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing address</h4>
+            <form class="card p-2" name="myForm" id="checkout-form"  accept="#" method="POST" >
+            <div class="row">
+             {{#each docs }}
+            
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" name="fname" value="{{ this.fname }}" placeholder="" >
+                {{!-- <div class="invalid-feedback">
+                 <p id="valid">
+                </div> --}}
+                <br>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" name="lname" value="{{ this.lname }}" placeholder="" >
+                {{!-- <div class="invalid-feedback">
+                 <p id="valid"CCC>
+                </div> --}}
+                <br>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email </label>{{ log emailid}}
+              <input type="email" class="form-control" id="email" value="{{ this.email}}" readonly>
+              
+            </div>
+
+            <div class="mb-3">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder=""  ><br>
+              {{!-- <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div> --}}
+            </div>
+
+            <div class="mb-3">
+              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"><br>
+            </div>
+
+            <div class="row">
+              
+              <div class="col-md-3 mb-3">
+                <label for="zip">Zip</label>
+                <input type="number" class="form-control" id="zip" name="zipcode" placeholder=""  >
+                
+              </div>
+            </div>
+            {{/each}}
+            <hr class="mb-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+              <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" name="savedata" id="save-info">
+              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+            </div>
+            <hr class="mb-4">
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked  >
+                <label class="custom-control-label" for="credit">Credit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"  >
+                <label class="custom-control-label" for="debit">Debit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"  >
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div><br>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input type="text" class="form-control" id="name" placeholder="Full name as displayed on card"  >
+                
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input type="text" class="form-control" id="card-number" placeholder="Card numebr"  >
+                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration Month</label>
+                <input type="text" class="form-control" id="card-expiry-month"  placeholder=""  >
+               
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration Year</label>
+                <input type="text" class="form-control" id="card-expiry-year" placeholder=""  >
+                
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input type="text" class="form-control" id="card-cvv" placeholder=""  >
+                
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" onclick="validateForm()" type="submit">Continue to checkout</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="javascripts/checkout.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+  </body>
+</html>
+
+
+
+{{!-- <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <h1>Checkout</h1>
+        <h4>Your Total: ${{ch_total}}</h4>
+        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+            {{errMsg}}
+        </div>
+        <form action="/checkout" method="post" id="checkout-form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required name="name">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" class="form-control" required name="address">
+                    </div>
+                </div>
+                <hr>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="card-name">Card Holder Name</label>
+                        <input type="text" id="card-name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="card-number">Credit Card Number</label>
+                        <input type="text" id="card-number" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="card-expiry-month">Expiration Month</label>
+                                <input type="text" id="card-expiry-month" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label for="card-expiry-year">Expiration Year</label>
+                                <input type="text" id="card-expiry-year" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="card-cvc">CVC</label>
+                        <input type="text" id="card-cvc" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Buy now</button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="javascripts/checkout.js"></script> --}}
+
+
+{{!-- <div class="wrapper">
     <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
         <h1>Checkout</h1>
         <h4>Your Total: ${{ch_total}}</h4>
@@ -11,26 +275,26 @@
                 <div class="col-xs-12">
                     <div class="form-wrapper">
                         <label for="name">Name</label>
-                        <input type="text" id="name" style="width: 250px;" class="form-control" required name="name">
+                        <input type="text" id="name" style="width: 250px;" class="form-control"   name="name">
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-wrapper">
                         <label for="address">Address</label>
-                        <input type="text" id="address" style="width: 250px;" class="form-control" required name="address">
+                        <input type="text" id="address" style="width: 250px;" class="form-control"   name="address">
                     </div>
                 </div>
                 <hr>
                 <div class="col-xs-12">
                     <div class="form-wrapper">
                         <label for="card-name">Card Holder Name</label>
-                        <input type="text" id="card-name" style="width: 250px;" class="form-control" required>
+                        <input type="text" id="card-name" style="width: 250px;" class="form-control"  >
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="form-wrapper">
                         <label for="card-number">Credit Card Number</label>
-                        <input type="text" id="card-number" style="width: 250px;" class="form-control" required>
+                        <input type="text" id="card-number" style="width: 250px;" class="form-control"  >
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -38,13 +302,13 @@
                         <div class="col-xs-6">
                             <div class="form-wrapper">
                                 <label for="card-expiry-month">Expiration Month</label>
-                                <input type="text" id="card-expiry-month" style="width: 80px;" class="form-control" required>
+                                <input type="text" id="card-expiry-month" style="width: 80px;" class="form-control"  >
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-wrapper">
                                 <label for="card-expiry-year" style="margin-left:50px;">Expiration Year</label>
-                                <input type="text" id="card-expiry-year" style="width: 80px;margin-left: 50px;" class="form-control" required>
+                                <input type="text" id="card-expiry-year" style="width: 80px;margin-left: 50px;" class="form-control"  >
                             </div>
                         </div>
                     </div>
@@ -52,7 +316,7 @@
                 <div class="col-xs-12">
                     <div class="form-wrapper">
                         <label for="card-cvc">CVC</label>
-                        <input type="text" id="card-cvc" class="form-control" required>
+                        <input type="text" id="card-cvc" class="form-control"  >
                     </div>
                 </div>
             </div>
@@ -62,4 +326,4 @@
 </div>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript" src="javascripts/checkout.js"></script>
+<script type="text/javascript" src="javascripts/checkout.js"></script> --}}

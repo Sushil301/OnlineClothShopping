@@ -9,6 +9,7 @@ var category = require('../models/category');
 var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt-nodejs');
 
+var Order = require('../models/order');
 
 
 router.use(function (req, res, next) {
@@ -66,7 +67,7 @@ router.post('/editProfile',isLoggedIn, function(req, res, next) {
         
     }
     if(req.body.btncancel){
-        res.render('/editProfile');
+        res.render('shop/index');
 
     }
  });
@@ -93,8 +94,27 @@ router.get('/add-to-cart/:id', function (req, res, next) {
       }
       cart.add(product, product.id);
       req.session.cart = cart;
-      console.log(req.session.cart);
-      res.redirect('/');
+      Product.find((err,docs) => {
+        if(!err){
+            category.find((err,categorydocs)=>{
+                if(!err)
+                {
+                  
+                  res.render("shop/shop-recommend", {
+                    list:docs ,
+                    categorydetails:categorydocs
+                  });
+                }
+                else
+                {
+                  console.log('Error in retriving category data :'+ err);
+                }
+              });
+        }
+        else{
+            console.log('error '+err);
+        }
+    })
   });
 });
 
@@ -245,7 +265,23 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
     }
     var cart = new Cart(req.session.cart);
     var errMsg = req.flash('error')[0];
-    res.render('shop/checkout', {ch_total: cart.totalPrice, errMsg: errMsg, noError: !errMsg});
+
+    user.find({email: req.session.emailid}, function(err,docs){
+        if(err) throw err;
+        if(!err){
+            res.render('shop/checkout',
+            {
+               ch_total: cart.totalPrice,
+               product: cart.generateArray() ,
+               errMsg: errMsg,
+               noError: !errMsg,
+               totalPrice: cart.totalPrice,
+               docs : docs
+           });
+        }
+    });
+
+   
 });
 
 router.post('/checkout', isLoggedIn,function(req, res, next){

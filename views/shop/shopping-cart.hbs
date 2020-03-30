@@ -22,7 +22,7 @@
                     <tr>
                         <td class="col-md-6">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://localhost:3000/{{this.item.productImage}}" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="/images/productImage/{{this.item.productImage}}" style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
                                 <h4 class="media-heading"><a href="#">{{this.item.productName}}</a></h4>
                                 <h5 class="media-heading"><a href="#">{{ this.item.ProductType}}</a></h5>
@@ -66,13 +66,12 @@
                         <td>   </td>
                         <td>
                         <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-                            <a href="/shop" type="button" class="glyphicon glyphicon-shopping-cart">Continue Shopping</a>
+                            <a href="/shop" type="button" style="margin-right: 50px;" class="btn btn-success">Continue Shopping</a>
                         </div>
                        </td>
                         <td>
-                        <button type="button" class="btn btn-success">
-                            Checkout <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
+                         <a href="/checkout" type="button" class="btn btn-success">Checkout</a>
+                        </td>
                     </tr>
                     
 
