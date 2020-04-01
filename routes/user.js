@@ -33,7 +33,18 @@ router.get('/profile', isLoggedIn, function(req, res, next){
   user.find({'email': req.session.emailid} , function(err, userprof){
 
     if(!err){
-      res.render('user/profile', { userprofile: userprof});
+      Order.find({user: req.user}, function(err, orders){
+        if (err){
+          return res.write('Error!');
+        }
+        var cart;
+        orders.forEach(function(order){
+            cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        });
+        res.render('user/profile', { userprofile: userprof,orders: orders});
+
+      });
     }
     else{
       console.log("Error : "+ err);
@@ -41,19 +52,14 @@ router.get('/profile', isLoggedIn, function(req, res, next){
   });
 
   
-  // Order.find({user: req.user}, function(err, orders){
-  //   if (err){
-  //     return res.write('Error!');
-  //   }
-  //   var cart;
-  //   orders.forEach(function(order){
-  //       cart = new Cart(order.cart);
-  //       order.items = cart.generateArray();
-  //   });
-  //   res.render('user/profile', {orders: orders});
-  // });
+ 
 });
-  
+
+router.get('/contactus', function(req, res, next){
+  res.render('user/contactus');
+ });
+
+
 router.get('/logout', function(req, res, next){
   req.logOut();
   res.redirect('/');

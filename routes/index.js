@@ -96,18 +96,15 @@ router.get('/add-to-cart/:id', function (req, res, next) {
       req.session.cart = cart;
       Product.find((err,docs) => {
         if(!err){
-            category.find((err,categorydocs)=>{
-                if(!err)
+            category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+                console.log(categorydocs);
+                if(categorydocs)
                 {
                   
-                  res.render("shop/shop-recommend", {
+                  res.render("admin/product", {
                     list:docs ,
                     categorydetails:categorydocs
                   });
-                }
-                else
-                {
-                  console.log('Error in retriving category data :'+ err);
                 }
               });
         }
@@ -151,18 +148,15 @@ router.get('/aboutus', function (req, res, next) {
 router.get('/shop', function (req, res, next) {
     Product.find((err,docs) => {
         if(!err){
-            category.find((err,categorydocs)=>{
-                if(!err)
+            category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+                console.log(categorydocs);
+                if(categorydocs)
                 {
                   
                   res.render("shop/shop-recommend", {
                     list:docs ,
                     categorydetails:categorydocs
                   });
-                }
-                else
-                {
-                  console.log('Error in retriving category data :'+ err);
                 }
               });
         }
@@ -176,19 +170,17 @@ router.get('/categorywiseproduct/:name', function(req, res, next) {
     Product.find({}).where('productType').equals(req.params.name).then( docs=>{
      if(docs)
      {
-      category.find((err,categorydocs)=>{
-        if(!err)
-        {
-          res.render("shop/shop-recommend", {
-            list:docs ,
-            categorydetails:categorydocs
+        category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+            console.log(categorydocs);
+            if(categorydocs)
+            {
+              
+              res.render("shop/shop-recommend", {
+                list:docs ,
+                categorydetails:categorydocs
+              });
+            }
           });
-        }
-        else
-        {
-          console.log('Error in retriving category data :'+ err);
-        }
-      });
      }
      else
      {
@@ -201,38 +193,32 @@ router.post('/getSortData',function(req,res,next){
     console.log("Heloo "+ req.body.selectSortpicker);
     if(querydata == "htl"){
         Product.find({}).sort({price : -1}).then(docs => {
-                category.find((err,categorydocs)=>{
-                    if(!err)
-                    {
-                    
-                    res.render("shop/shop-recommend", {
-                        list:docs ,
-                        categorydetails:categorydocs
-                    });
-                    }
-                    else
-                    {
-                    console.log('Error in retriving category data :'+ err);
-                    }
-                });
+            category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+                console.log(categorydocs);
+                if(categorydocs)
+                {
+                  
+                  res.render("shop/shop-recommend", {
+                    list:docs ,
+                    categorydetails:categorydocs
+                  });
+                }
+              });
         })
     }
     if(querydata == "lth"){
         Product.find({}).sort({price : 1}).then(docs => {
-                category.find((err,categorydocs)=>{
-                    if(!err)
-                    {
-                    
-                    res.render("shop/shop-recommend", {
-                        list:docs ,
-                        categorydetails:categorydocs
-                    });
-                    }
-                    else
-                    {
-                    console.log('Error in retriving category data :'+ err);
-                    }
-                });
+            category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+                console.log(categorydocs);
+                if(categorydocs)
+                {
+                  
+                  res.render("shop/shop-recommend", {
+                    list:docs ,
+                    categorydetails:categorydocs
+                  });
+                }
+              });
         })
     }
     

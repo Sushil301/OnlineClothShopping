@@ -7,8 +7,10 @@ var userSchema = new Schema({
     lname: {type: String, required:true},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    isAdmin: {type: Boolean,default: false}
-
+    isAdmin: {type: Boolean,default: false},
+    address: {type:String, default: ""},
+    pincode: {type:Number, default:""},
+    contactNumber: {type: Number, default: ""}
 });
 
 userSchema.methods.generateHash = function(password) {

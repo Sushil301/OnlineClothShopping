@@ -76,18 +76,14 @@ router.get('/addproduct', auth.isAdmin ,function(req, res, next) {
    Product.find((err,docs)=>{
      if(!err)
      {
-      category.find((err,categorydocs)=>{
-        if(!err)
+      category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+        console.log(categorydocs);
+        if(categorydocs)
         {
-          
           res.render("admin/product", {
             list:docs ,
             categorydetails:categorydocs
           });
-        }
-        else
-        {
-          console.log('Error in retriving category data :'+ err);
         }
       });
      }
@@ -153,7 +149,6 @@ router.get('/delete/:id',auth.isAdmin , (req,res)=>{
  });
 
   router.post('/updateprod', auth.isAdmin, function(req, res, next){
-   console.log(req.body.productName);
    res.redirect('/admin/product');
   });
 
@@ -163,13 +158,8 @@ router.get('/delete/:id',auth.isAdmin , (req,res)=>{
 // });
 
 router.post('/getdata', auth.isAdmin, function(req, res, next) {
-   console.log(req.body.prodid);
-   console.log(req.body.name);
-
-
    Product.findByIdAndUpdate(req.body.prodid, req.body,{new:true}, (err, doc) => {
        if (!err) {
-          //  console.log('updated');
            res.redirect('/admin/product');
        }
        else{
@@ -191,7 +181,7 @@ function insertCategory(req,res ){
   cate.categoryName = req.body.categoryName;
   cate.save((err,docs)=>{
     if(!err){
-      res.render('shop/index', { title: 'Product Added' });
+      res.render('shop/index', { title: 'category Added' });
       console.log('Inserted');
     }
     else{
@@ -204,19 +194,17 @@ router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
  Product.find({}).where('productType').equals(req.params.name).then( docs=>{
   if(docs)
   {
-   category.find((err,categorydocs)=>{
-     if(!err)
-     {
-       res.render("admin/product", {
-         list:docs ,
-         categorydetails:categorydocs
-       });
-     }
-     else
-     {
-       console.log('Error in retriving category data :'+ err);
-     }
-   });
+    category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+      console.log(categorydocs);
+      if(categorydocs)
+      {
+        
+        res.render("admin/product", {
+          list:docs ,
+          categorydetails:categorydocs
+        });
+      }
+    });
   }
   else
   {
@@ -231,38 +219,32 @@ router.post('/getSortData',function(req,res,next){
   console.log("Heloo "+ req.body.selectSortpicker);
   if(querydata == "htl"){
       Product.find({}).sort({price : -1}).then(docs => {
-              category.find((err,categorydocs)=>{
-                  if(!err)
-                  {
-                  
-                  res.render("admin/product", {
-                      list:docs ,
-                      categorydetails:categorydocs
-                  });
-                  }
-                  else
-                  {
-                  console.log('Error in retriving category data :'+ err);
-                  }
-              });
+        category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+          console.log(categorydocs);
+          if(categorydocs)
+          {
+            
+            res.render("admin/product", {
+              list:docs ,
+              categorydetails:categorydocs
+            });
+          }
+        });
       })
   }
   if(querydata == "lth"){
       Product.find({}).sort({price : 1}).then(docs => {
-              category.find((err,categorydocs)=>{
-                  if(!err)
-                  {
-                  
-                  res.render("admin/product", {
-                      list:docs ,
-                      categorydetails:categorydocs
-                  });
-                  }
-                  else
-                  {
-                  console.log('Error in retriving category data :'+ err);
-                  }
-              });
+        category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+          console.log(categorydocs);
+          if(categorydocs)
+          {
+            
+            res.render("admin/product", {
+              list:docs ,
+              categorydetails:categorydocs
+            });
+          }
+        });
       })
   }
   
