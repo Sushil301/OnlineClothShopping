@@ -12,7 +12,7 @@
 </div>
       	<div class="wrapper">
 			<div class="inner">
-				<form action="/user/contactus" method="post">
+				<form action="/contact/contactus" method="post">
 					<h3 style="text-align: center;">Registration Form</h3>
 					<div class="form-group">
 						<div class="form-wrapper">
@@ -34,8 +34,7 @@
                         <textarea  id="Message" class="form-control" name="message" required='required'></textarea>
 					</div><br>
 					
-                    <button type="submit" class="btn-st rd-30" name="send">Send</button>
-                    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                    <input type="submit" class="btn-st rd-30" name="send" value="Send"/>
 				</form>
 			</div>
 		</div>

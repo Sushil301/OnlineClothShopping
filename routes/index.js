@@ -10,13 +10,14 @@ var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt-nodejs');
 
 var Order = require('../models/order');
+var auth = require('../config/auth');
 
 
 router.use(function (req, res, next) {
     res.locals.login = req.isAuthenticated();
     next();
 });
-router.post('/editProfile',isLoggedIn, function(req, res, next) { 
+router.post('/editProfile',auth.isLoggedIn, function(req, res, next) { 
     if(req.body.updateprofile){
         user.findByIdAndUpdate(req.body._id, req.body,{new:true}, (err, doc) => {
             if (!err) {
@@ -33,7 +34,7 @@ router.post('/editProfile',isLoggedIn, function(req, res, next) {
        res.render('user/changepassword',{title:"chancepassword"});
     }
  });
- router.post('/changepassword',isLoggedIn, function(req, res, next) { 
+ router.post('/changepassword',auth.isLoggedIn, function(req, res, next) { 
     if(req.body.btnchangepass){
         var id = req.user._id;
         var pass= req.body.curPass;
@@ -87,7 +88,7 @@ router.get('/', function (req, res, next) {
 router.get('/add-to-cart/:id', function (req, res, next) {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
-  
+  req.session.productId = productId;
   Product.findById(productId, function (err, product) {
       if (err){
           return res.redirect('/');
@@ -97,11 +98,10 @@ router.get('/add-to-cart/:id', function (req, res, next) {
       Product.find((err,docs) => {
         if(!err){
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
-                console.log(categorydocs);
                 if(categorydocs)
                 {
                   
-                  res.render("admin/product", {
+                  res.render("shop/shop-recommend", {
                     list:docs ,
                     categorydetails:categorydocs
                   });
@@ -149,7 +149,6 @@ router.get('/shop', function (req, res, next) {
     Product.find((err,docs) => {
         if(!err){
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
-                console.log(categorydocs);
                 if(categorydocs)
                 {
                   
@@ -171,7 +170,6 @@ router.get('/categorywiseproduct/:name', function(req, res, next) {
      if(docs)
      {
         category.find({}).sort({categoryName : 1}).then(categorydocs =>{
-            console.log(categorydocs);
             if(categorydocs)
             {
               
@@ -194,7 +192,6 @@ router.post('/getSortData',function(req,res,next){
     if(querydata == "htl"){
         Product.find({}).sort({price : -1}).then(docs => {
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
-                console.log(categorydocs);
                 if(categorydocs)
                 {
                   
@@ -209,7 +206,6 @@ router.post('/getSortData',function(req,res,next){
     if(querydata == "lth"){
         Product.find({}).sort({price : 1}).then(docs => {
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
-                console.log(categorydocs);
                 if(categorydocs)
                 {
                   
@@ -245,7 +241,7 @@ router.get('/shopping-cart', function (req, res, next) {
     res.render('shop/shopping-cart', {products: cart.generateArray(), itemPrice: cart.itemprice, totalPrice: cart.totalPrice});
 });
 
-router.get('/checkout', isLoggedIn, function (req, res, next) {
+router.get('/checkout', auth.isLoggedIn, function (req, res, next) {
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
@@ -270,7 +266,7 @@ router.get('/checkout', isLoggedIn, function (req, res, next) {
    
 });
 
-router.post('/checkout', isLoggedIn,function(req, res, next){
+router.post('/checkout', auth.isLoggedIn,function(req, res, next){
     if (!req.session.cart) {
         return res.redirect('/shopping-cart');
     }
@@ -305,14 +301,4 @@ router.post('/checkout', isLoggedIn,function(req, res, next){
         });
     });
 });
-
-
-
-function isLoggedIn(req, res, next){
-    if (req.isAuthenticated()){
-      return next();
-    }
-    req.session.oldUrl = req.url;
-    res.redirect('/user/signin');
-  }
 module.exports = router;

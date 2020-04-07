@@ -2,6 +2,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var nodemailer = require('nodemailer');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const keys = require('./keys');
 
 passport.serializeUser(function(user, done){
     done(null, user.id);
@@ -12,6 +14,30 @@ passport.deserializeUser(function(id, done){
         done(err, User);
     });
 });
+
+// passport.use(
+//     new GoogleStrategy({
+//         clientID: keys.google.clientID,
+//         clientSecret: keys.google.clientSecret,
+//         callbackURL: '/user/google/redirect'
+//     }, (accessToken, refreshToken, profile, done) => {
+//         User.findOne({googleID: profile.id}).then((currentUser) => {
+//             if(currentUser){
+//                 console.log('user is: ', currentUser);
+//                 done(null, currentUser);
+//             } else {
+//                 new User({
+//                     googleId: profile.name.id,
+//                     firstName: profile.givenName,
+//                     lastName: profile.familyName
+//                 }).save().then((newUser) => {
+//                     console.log('created new user: ', newUser);
+//                     done(null, newUser);
+//                 });
+//             }
+//         });
+//     })
+// );
 
 
 var smtpTransport = nodemailer.createTransport({
@@ -78,7 +104,6 @@ passport.use('local.signup', new LocalStrategy({
                          res.end("error");
                     }else{
                         console.log("Message sent: " + response.message);
-                        res.end("sent");
                         res.render('index',{title:'express'});
                     }
                 });

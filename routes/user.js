@@ -7,6 +7,8 @@ var Order = require('../models/order');
 var Cart = require('../models/cart');
 var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt-nodejs');
+var TempCart = require('../models/tempcart');
+var auth = require('../config/auth');
 
 
 var rn = require('random-number');
@@ -28,7 +30,7 @@ router.use(function(req, res, next){
   next();
 });
 
-router.get('/profile', isLoggedIn, function(req, res, next){
+router.get('/profile', auth.isLoggedIn, function(req, res, next){
   console.log(req.session.emailid);
   user.find({'email': req.session.emailid} , function(err, userprof){
 
@@ -62,10 +64,12 @@ router.get('/contactus', function(req, res, next){
 
 router.get('/logout', function(req, res, next){
   req.logOut();
+  req.session.cart = null;
+
   res.redirect('/');
  });
  
-router.use('/', notLoggedIn, function(req, res, next){
+router.use('/', auth.notLoggedIn, function(req, res, next){
     next();
 });
 
@@ -98,6 +102,39 @@ router.get('/signup', function(req, res, next){
     failureRedirect: '/user/signin',
     failureFlash: true
   }),function(req, res, next){
+    // if(req.session.cart){
+      
+    //   var cartsession = req.session.cart;
+     
+    //   var tempcartobj = new TempCart({
+    //     UserId: req.user,
+    //     Items: cartsession
+    //   });
+    //   tempcartobj.save(function(err, result){
+    //       if(err){
+    //         console.log("Error "+ err);
+    //       }
+    //       else{
+    //         console.log("Result"+result);
+    //       }
+    //   });
+    // }
+    // else{
+    
+    //  TempCart.findOne({'UserId': req.user._id}).then(result =>{
+    //    if(result){
+    //      req.session.result = result;
+    //      var cart = new Cart(req.session.cart1 ? req.session.cart1 : {});
+    //     req.session.cartResult = cart;
+    //     console.log(req.session.cart1.totalQty);
+
+    //      console.log("result kk"+req.session.result);
+    //    }
+    //    else{
+    //      console.log("Cart empty");
+    //    }
+    //  });
+    // }
     if (req.session.oldUrl){
       var oldUrl = req.session.oldUrl;
       req.session.oldUrl = null;
@@ -108,11 +145,11 @@ router.get('/signup', function(req, res, next){
     }
   });
 
-router.get('/verifyEmail',notLoggedIn,function(req,res,next){
+router.get('/verifyEmail',auth.notLoggedIn,function(req,res,next){
   res.render('user/verifyEmail',{csrfToken: req.csrfToken()});
 });
 
-router.post('/verifyEmail', notLoggedIn, function(req, res, next) {    
+router.post('/verifyEmail', auth.notLoggedIn, function(req, res, next) {    
   var mailOptions,host,link;
      var smtpTransport = nodemailer.createTransport({
          service: "Gmail",
@@ -193,18 +230,13 @@ router.post('/forgotPassword', function(req, res, next) {
   }
 });
 
-function isLoggedIn(req, res, next){
-  if (req.isAuthenticated()){
-    return next();
-  }
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile']
+}));
+
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   res.redirect('/');
-}
-function notLoggedIn(req, res, next){
-      if (!req.isAuthenticated()){
-          return next();
-      }
-    res.redirect('/');
-}
+});
 
 module.exports = router;
 

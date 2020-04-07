@@ -43,8 +43,11 @@
 								<span class="shop_contact_no"><i class="fa fa-phone"></i> +91 9033582481  </span>
                                 <a href="/shopping-cart/" class="cart-btns" title="cart">
                                     <strong>shopping cart</strong>
+                                         {{log req.session.cart1 }}
+                                         {{ log "Hello" session.cart1}}
+                                    
                                     <span class="icon badge"><i class="fa fa-shopping-cart">{{session.cart.totalQty}}</i></span>
-                                   
+                                    
                                 </a>
                             </div>
                         </div>
@@ -146,7 +149,7 @@
                                              <li><a href="/shop">SHOP</a></li>
 
                                         {{/if}}
-                                        <li><a href="/user/contactus">CONTACT</a></li>
+                                        <li><a href="/contact/contactus">CONTACT</a></li>
                                         <li><a href="/aboutus">ABOUT US</a></li>
                                         {{#if currentUser.isAdmin}}
 

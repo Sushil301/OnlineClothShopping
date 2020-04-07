@@ -17,6 +17,8 @@ var nodemailer = require('nodemailer');
 var indexRouter = require('./routes/index');
 var userRoute = require('./routes/user');
 var adminRoute = require('./routes/admin');
+var contactus = require('./routes/contactus');
+
 
 var app = express();
 mongoose.connect('mongodb://localhost:27017/OCM', 
@@ -67,6 +69,8 @@ app.use(function(req, res, next) {
   }
   next();
 });
+
+app.use('/contact', contactus);
 
 app.use('/admin', adminRoute);
 // app.use(app.adminRoute);

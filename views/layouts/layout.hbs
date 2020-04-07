@@ -39,8 +39,12 @@
     </head>
   <body>
     {{> header }}
+        <script src="/js/vendor/jquery-3.2.1.min.js"></script>
 
-    <script src="/js/vendor/jquery-3.2.1.min.js"></script>
+    {{{body}}}
+
+    {{> footer }}
+  </body>
 		<!-- tether js -->
 		<script src="/js/tether.min.js"></script>
 		<!-- bootstra js -->
@@ -69,10 +73,4 @@
         <script src="/js/plugins.js"></script>
 		<!-- main js -->
         <script src="/js/main.js"></script>
-
-    {{{body}}}
-
-    {{> footer }}
-  </body>
-        
 </html>

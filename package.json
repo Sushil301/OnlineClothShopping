@@ -27,6 +27,7 @@
     "multer": "^1.4.2",
     "nodemailer": "^6.4.4",
     "passport": "^0.3.2",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "random-number": "0.0.9",
