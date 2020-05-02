@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
-    googleID : { type: mongoose.Schema.Types.String },
+   // googleID : { type: mongoose.Schema.Types.String },
     fname: {type: String,required: true},
     lname: {type: String, required:true},
     email: {type: String, required: true,unique:true},
@@ -11,7 +11,8 @@ var userSchema = new Schema({
     isAdmin: {type: Boolean,default: false},
     address: {type:String, default: ""},
     pincode: {type:Number, default:""},
-    contactNumber: {type: Number, default: ""}
+    contactNumber: {type: Number, default: ""},
+    Joinon:{type: Date,default: new Date()}
 });
 
 userSchema.methods.generateHash = function(password) {

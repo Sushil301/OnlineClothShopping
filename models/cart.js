@@ -4,7 +4,18 @@ module.exports=function Cart(oldCart){
     this.totalPrice=oldCart.totalPrice || 0;
     this.itemprice=oldCart.itemprice || 0;
  
-    this.add=function(item,id  ){
+    this.add=function(item,id){
+        var StoredItem=this.items[id];
+        if(!StoredItem){
+            StoredItem=this.items[id]={item: item,qty:0 ,price:0};
+        }
+        StoredItem.qty++;
+        this.itemprice = StoredItem.item.price;
+        StoredItem.price=StoredItem.item.price * StoredItem.qty;
+        this.totalQty++;
+        this.totalPrice += StoredItem.item.price;
+    }
+    this.addQty=function(id){
         var StoredItem=this.items[id];
         if(!StoredItem){
             StoredItem=this.items[id]={item: item,qty:0 ,price:0};

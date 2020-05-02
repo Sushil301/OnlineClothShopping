@@ -41,14 +41,14 @@
                         <div class="col-lg-7 col-md-7 col-sm-9 col-xs-7">
                             <div class="cart-btn text-right">
 								<span class="shop_contact_no"><i class="fa fa-phone"></i> +91 9033582481  </span>
+                                {{#if currentUser.isAdmin}}
+                                {{else}}
                                 <a href="/shopping-cart/" class="cart-btns" title="cart">
-                                    <strong>shopping cart</strong>
-                                         {{log req.session.cart1 }}
-                                         {{ log "Hello" session.cart1}}
-                                    
+                                    <strong>shopping cart</strong>  
                                     <span class="icon badge"><i class="fa fa-shopping-cart">{{session.cart.totalQty}}</i></span>
                                     
                                 </a>
+                                {{/if}}
                             </div>
                         </div>
                     </div>
@@ -70,78 +70,6 @@
                                            
                                         </li>
                                      
-                                        {{!-- <li>
-                                            <a href="#">WOMENS</a>
-                                            <div class="megamenu">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd-0">
-                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                                <div class="links">
-                                                                    <h4>Shop</h4>
-                                                                    <ul>
-                                                                        <li><a href="/shop-recommend.html">product</a></li>
-                                                                        <li><a href="/shop-recommend.html">Women</a></li>
-                                                                        <li><a href="/shop-recommend.html">men</a></li>
-                                                                        <li><a href="/shop-recommend.html">Teens</a></li>
-                                                                        <li><a href="/shop-recommend.html">Kids</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                                <div class="links">
-                                                                    <h4>men</h4>
-                                                                    <ul>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Accessories</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Women</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">men</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Teens</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Kids</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                                <div class="links">
-                                                                    <h4>men</h4>
-                                                                    <ul>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Accessories</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Women</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">men</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Teens</a></li>
-                                                                        <li><a href="html/tm/themart/shop-recommend.html">Kids</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                                <div class="links">
-                                                                    <div class="menu-slider">
-                                                                        <figure><img src="html/tm/themart/images/products/2.jpg" alt=""/></figure>
-                                                                        <figure><img src="html/tm/themart/images/products/3.jpg" alt=""/></figure>
-                                                                        <figure><img src="html/tm/themart/images/products/4.jpg" alt=""/></figure>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li> --}}
-                                        {{!-- <li class="lists-menus">
-                                            <a href="javascript:void(0)">pages</a>
-                                            <ul class="list-menu">
-                                                <li><a href="html/tm/themart/about.html">about</a></li>
-                                                <li><a href="html/tm/themart/blog.html">blog</a></li>
-                                                <li><a href="html/tm/themart/blog-single.html">blog single</a></li>
-                                                <li><a href="index.html">shop filter</a></li>
-                                                <li><a href="html/tm/themart/shop-recommend.html">shop recommend</a></li>
-                                                <li><a href="index.html">shop-single</a></li>
-                                                <li><a href="index.html">checkout</a></li>
-                                                <li><a href="index.html">wishlist</a></li>
-                                                <li><a href="index.html">compare</a></li>
-                                                <li><a href="html/tm/themart/login.html">Login Register</a></li>
-                                            </ul>
-                                            
-                                        </li> --}}
                                         {{#if currentUser.isAdmin}}
                                             <li><a href="/admin/product">SHOP</a></li>
 
@@ -173,7 +101,7 @@
                                                                     <h4>Category</h4>
                                                                     <ul>
                                                                         <li><a href="/admin/addcategory">Add Category</a></li>
-                                                                        <li><a href="/">Women</a></li>
+                                                                        <li><a href="/admin/discount">Add Discount</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -182,136 +110,21 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        <li><a href="/admin/reports">Reports</a></li>
+
                                         {{/if}}
-                                        {{!-- {{#if currentUser.isAdmin}}
-                                            <li class="lists-menus">
-                                                <a href="javascript:void(0)">Product</a>
-                                                <ul class="list-menu">
-                                                    <li><a href="/admin/addproduct">Add Product</a></li>
-                                                    <li><a href="/admin/product">View Products</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="lists-menus">
-                                                <a href="javascript:void(0)">Category</a>
-                                                <ul class="list-menu">
-                                                    <li><a href="/admin/addproduct">Add Product</a></li>
-                                                    <li><a href="/admin/product">View Products</a></li>
-                                                </ul>
-                                            </li>
-                                         {{/if}} --}}
+                                      
 
                                     </ul>
                                 </nav>
                             </div>
-                            <!-- Mobile Menu  Start -->
-                            {{!-- <div class="mobilemenu1">
-                                <div class="mobile-menu visible-sm visible-xs">
-                                    <nav>
-                                        <ul>
-                                            <li><a href="javascript:void(0)">Home</a>
-                                                <ul>
-                                                    <li><a href="index.html">Home One</a></li>
-                                                    <li><a href="html/tm/themart/index2.html">Home two</a></li>
-                                                    <li><a href="html/tm/themart/index3.html">Home three</a></li>
-                                                    <li><a href="html/tm/themart/index4.html">Home four</a></li>
-                                                    <li><a href="html/tm/themart/index5.html">Home five</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="html/tm/themart/shop-recommend.html">mens</a></li>
-                                            <li><a href="html/tm/themart/shop-recommend.html">WOMENS</a></li>
-                                            <li><a href="index.html">SHOP</a></li>
-                                            <li>
-                                                <a href="javascript:void(0)">pages</a>
-                                                <ul class="list-menu">
-                                                    <li><a href="html/tm/themart/about.html">about</a></li>
-                                                    <li><a href="html/tm/themart/blog.html">blog</a></li>
-                                                    <li><a href="html/tm/themart/blog-single.html">blog single</a></li>
-                                                    <li><a href="index.html">shop filter</a></li>
-                                                    <li><a href="html/tm/themart/shop-recommend.html">shop recommend</a></li>
-                                                    <li><a href="index.html">shop-single</a></li>
-                                                    <li><a href="index.html">checkout</a></li>
-                                                    <li><a href="index.html">wishlist</a></li>
-                                                    <li><a href="index.html">compare</a></li>
-                                                    <li><a href="html/tm/themart/login.html">Login Register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="index.html">CONTACT US</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div> --}}
-                            <!-- Mobile Menu  End -->
+                        
                         </div>
                     </div>
                 </div>
-                {{!-- <div class="cat-ser">
-                    <div class="catagery-list">
-                        <span><i class="fa fa-folder-open-o"></i></span>
-                        <select>
-                            <option>Category</option>
-                            <option>Electronic</option>
-                            <option>Associroies</option>
-                            <option>Electronic</option>
-                        </select>
-                    </div>
-                    <div class="search-box">
-                        <form>
-                            <input type="search" placeholder="Search your item here...">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div> --}}
+             
             </div>
             <!--Offset wrapper start here-->
        
             <!--Offset wrapper end here-->
         </header>
-
-{{!-- 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-             Srushti Western Outfits
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-               <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home 
-                </a></li>
-                 <li><a href="/gallery/"><i class="fa fa-image" aria-hidden="true"></i> Gallery 
-                  
-                </a></li>
-                 
-                <li><a href="/shopping-cart/"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
-                    <span class="badge">{{session.cart.totalQty}}</span>
-                </a></li>
-                <li><a href="/aboutus/"><i class="fa fa-info" aria-hidden="true"></i> About Us 
-                </a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                       {{#if login }}
-                            <li><a href="/user/profile">User Account</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/user/logout">Logout</a></li>
-                        {{else}}
-                            <li><a href="/user/signup">Sign Up</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/user/signin">Sign In</a></li>
-                        {{/if}}
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav> --}}

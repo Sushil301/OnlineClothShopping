@@ -119,6 +119,7 @@
                                 <div class="categories-list">
                                     <ul>
                                         {{#each categorydetails }}
+                                        
                                         <li><a href="/categorywiseproduct/{{ this.categoryName }}"><span><i class="fa fa-anchor"></i></span>{{ this.categoryName }}</a></li>
                                       
                                         {{/each}}
@@ -131,11 +132,12 @@
                                 </div>
                                 <div class="pro-size">
                                     <ul class="list-inline">
-                                        <li class="active"><span>m</span></li>
-                                        <li><span>s</span></li>
-                                        <li><span>l</span></li>
-                                        <li><span>xl</span></li>
-                                        <li><span>xxl</span></li>
+                                       <li><a href="sizesort/m"><span>m</span></li></a>
+                                        <li><a href="sizesort/s"><span>s</span></li></a>
+                                        <li><a href="sizesort/l"><span>l</span></li></a>
+                                        <li><a href="sizesort/xl"><span>xl</span></li></a>
+                                        <li><a href="sizesort/xxl"><span>xxl</span></li></a>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -183,10 +185,11 @@
                         </div>
                         <div class="col-sm-12">
                             <div id="products" class="row">
-                                {{# each list}}
+                                {{#each list}}
                                 <div class="item col-md-4 col-sm-6 col-xs-12">
                                     <div class="product-list">
                                         <figure>
+                                            
                                             <span class="offr">20%</span>
                                             <img style="height: 300px;width: 350px" src="/images/productImage/{{ this.productImage }}" alt="{{ this.productImage }}"/>
                                             <ul>
@@ -203,7 +206,7 @@
                                         </figure>
                                         <div class="content">
                                             <h4><a href="#">{{ this.productName }}</a> <span>{{ this.price }}</span></h4>
-                                            <p class="grid-p">{{ this.producttype }}</p>
+                                            <p class="grid-p">{{ this.productType }}</p>
                                             <p class="list-p">{{ this.description }}</p>
                                         </div>
                                     </div>

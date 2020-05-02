@@ -11,6 +11,8 @@ var bcrypt = require('bcrypt-nodejs');
 
 var Order = require('../models/order');
 var auth = require('../config/auth');
+var Discount = require('../models/discount');
+
 
 
 router.use(function (req, res, next) {
@@ -115,6 +117,16 @@ router.get('/add-to-cart/:id', function (req, res, next) {
   });
 });
 
+
+router.get('/addqty/:id', function(req, res, next){
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+    
+    cart.addQty(productId);
+    req.session.cart = cart;
+    res.redirect('/shopping-cart');
+});
+
 router.get('/reduce/:id', function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -151,7 +163,6 @@ router.get('/shop', function (req, res, next) {
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
                 if(categorydocs)
                 {
-                  
                   res.render("shop/shop-recommend", {
                     list:docs ,
                     categorydetails:categorydocs
@@ -286,6 +297,19 @@ router.post('/checkout', auth.isLoggedIn,function(req, res, next){
         if (err){
             req.flash('error', err.message);
             return res.redirect('/checkout');
+        }
+        if(req.body.savedata){
+            console.log(req.user._id);
+            user.findByIdAndUpdate(req.user._id,
+                {$set:{ address: req.body.address,
+                        pincode:req.body.pincode,
+                        contactNumber:req.body.contact
+                     }
+                }, (err, doc) => {
+                if (err) {
+                    console.log(err);
+                }
+            })
         }
         var order = new Order({
             user: req.user,

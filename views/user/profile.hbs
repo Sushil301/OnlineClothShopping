@@ -20,6 +20,10 @@
 
         </form>
         {{/each}}
+        
+        {{#if currentUser.isAdmin}}
+         <hr>
+        {{else}}
         <hr>
         <h2>My Orders</h2>
         {{#each orders}}
@@ -40,6 +44,7 @@
             </div>
         </div>
         {{/each}}
+        {{/if}}
         
     </div>
 </div>

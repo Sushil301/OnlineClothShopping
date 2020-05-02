@@ -1,30 +1,6 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <script>
-        function validateForm() {
-            
-            var fname = document.forms["myForm"]["fname"].value;
-            var lname = document.forms["myForm"]["lname"].value;    
-            var address = document.forms["myForm"]["address"].value;   
-            var zipcode = document.forms["myForm"]["zipcode"].value;    
-
-
-            if (fname == "" && lname == "" && address == "" ) {
-                alert("Please Field this details")
-               
-                return false;
-            }
-            if( document.myForm.zipcode.value == "" || isNaN( document.myForm.zipcode.value ) ||
-            document.myForm.zipcode.value.length != 6 ) {
-            
-            alert( "Please provide a zip in the format #####." );
-            document.myForm.zipcode.focus() ;
-            return false;
-         }
-        }
-</script>
-    </head>
+    
   <body class="bg-light">
         <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
             {{errMsg}}
@@ -94,53 +70,46 @@
 
             <div class="mb-3">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" name="address" placeholder=""  ><br>
+              <input type="text" class="form-control" id="address" name="address" placeholder="" value="{{ this.address }}"  ><br>
               {{!-- <div class="invalid-feedback">
                 Please enter your shipping address.
               </div> --}}
             </div>
 
-            <div class="mb-3">
-              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"><br>
-            </div>
-
             <div class="row">
               
               <div class="col-md-3 mb-3">
-                <label for="zip">Zip</label>
-                <input type="number" class="form-control" id="zip" name="zipcode" placeholder=""  >
-                
+                <label for="zip">Pincode</label>
+                <input type="number" class="form-control" id="zip" name="pincode" maxlength="6" minlength="6" placeholder="" value="{{ this.pincode }}" >
               </div>
+
+              <div class="col-md-3 mb-3">
+                <label for="contact">Contact Number</label>
+                <input type="number" class="form-control" id="contact" name="contact" maxlength="10" minlength="10" placeholder="" value="{{contactNumber}}" >
+              </div>
+
             </div>
-            {{/each}}
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
               <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
             </div>
+            {{#if contactNumber}}
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" name="savedata" id="save-info">
+              <input type="checkbox" checked class="custom-control-input" name="savedata" id="save-info">
               <label class="custom-control-label" for="save-info">Save this information for next time</label>
             </div>
+            {{else}}
+             <div class="custom-control custom-checkbox">
+              <input type="checkbox"   class="custom-control-input" name="savedata" id="save-info">
+              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+            </div>
+            {{/if}}
+            {{/each}}
+
             <hr class="mb-4">
 
             <h4 class="mb-3">Payment</h4>
-
-            <div class="d-block my-3">
-              <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked  >
-                <label class="custom-control-label" for="credit">Credit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input"  >
-                <label class="custom-control-label" for="debit">Debit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input"  >
-                <label class="custom-control-label" for="paypal">Paypal</label>
-              </div><br>
-            </div>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="cc-name">Name on card</label>
@@ -171,7 +140,7 @@
               </div>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" onclick="validateForm()" type="submit">Continue to checkout</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
           </form>
         </div>
       </div>

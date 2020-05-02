@@ -10,6 +10,7 @@
                 <thead>
                     <tr>
                         <th>Product</th>
+                        <th>Size</th>
                         <th>Quantity</th>
                         <th class="text-center">Price</th>
                         <th class="text-center">Total</th>
@@ -29,8 +30,19 @@
                                 <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
                             </div>
                         </div></td>
+                        <td class="col-md-1" style="text-align: center"><br>
+                            <select class="form-control">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                                <option>XXL</option>
+                            </select>
+                        </td>
                         <td class="col-md-1" style="text-align: center">
-                        <input type="number" class="form-control" id="exampleInputEmail1" value="{{ this.qty }}">
+                            <a href="/reduce/{{this.item._id}}" >-</a>
+                            <input type="text" class="form-control"  value="{{ this.qty }}">
+                            <a href="/addqty/{{this.item._id}}" >+</a>                        
                         </td>
                         <td class="col-md-1 text-center"><strong>{{ this.item.price}} </strong></td>
                         <td class="col-md-1 text-center"><strong>{{ this.price }}</strong></td>

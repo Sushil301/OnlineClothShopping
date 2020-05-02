@@ -13,6 +13,7 @@ var assert = require('assert');
 var session = require('express-session');
 
 var category = require('../models/category');
+var Discount = require('../models/discount');
 
 
 var url = 'mongodb://localhost:27017/OCM';
@@ -249,5 +250,49 @@ router.post('/getSortData',function(req,res,next){
   }
   
 });
+
+
+router.get('/discount',auth.isAdmin, function(req, res, next) {
+  category.find({}).then( docs=>{
+   if(docs)
+   {
+      res.render('admin/addDiscount',{categoryDeatils: docs});
+   }
+   else{
+     console.log("Error while fatching Product Details");
+   }
+  });
+ });
+ 
+ router.post('/addDiscount',auth.isAdmin,function(req,res,next){
+  insertDiscount(req,res);
+});
+
+function insertDiscount(req,res ){
+ if(req.body.save){
+   var discount = new Discount({
+     category: req.body.discountCategoryName,
+     Flat: req.body.flatprice
+   });
+   discount.save(function(err,result){
+      if(err){
+        console.log("Error " +err);
+      }
+      else{
+        console.log("Result: " +result);
+        res.redirect("/");
+      }
+   });
+ }
+ if(req.body.cancel){
+   res.redirect("/");
+ }
+}
+
+
+router.get('/reports',auth.isAdmin, function(req, res, next) {
+  res.render('admin/reports');
+ });
+
 
 module.exports = router;

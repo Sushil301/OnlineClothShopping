@@ -1,0 +1,49 @@
+ {{!-- <form action="/admin/addDiscount" method="POST" >
+    <table style="margin-left: 550px;">
+        <tr>
+        <th>Category Name : </th>
+        <td> <input class="form-control" type="text" name="categoryName" placeholder=""></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+        <td>
+	    	<button type="submit" class="btn-st rd-30" name="save">Save</button>
+			<button type="submit" class="btn-st rd-30" name="cancel">cancel</button>
+        </td>
+        </tr>
+    </table>
+ </form>
+
+  --}}
+ 
+ 
+ <form action="/admin/addDiscount" method="POST">
+    <table style="margin-left: 550px;">
+        <tr>
+        <th>Category Name : </th>
+        <td>
+            <select name="discountCategoryName" class="form-control">
+                 {{#each categoryDeatils }}
+                    <option value="{{ this._id }}">{{ this.categoryName }}</option>
+                 {{/each}}
+            </select>
+        </td>
+        </tr>
+        <tr><td><br></td></tr>
+         <tr>
+        <th>Flat in % : </th>
+        <td>
+          <input type="number" name="flatprice" class="form-control" min="0"/>
+        </td>
+        </tr>
+        
+        <tr><td><br></td></tr>
+
+        <tr>
+        <td>
+	    	<input type="submit" class="btn-st rd-30" name="save" value="Save"/>
+			<input type="submit" class="btn-st rd-30" name="cancel" value="Cancel"/>
+        </td>
+        </tr>
+    </table>
+ </form>
