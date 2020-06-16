@@ -200,6 +200,21 @@ router.get('/categorywiseproduct/:name', function(req, res, next) {
 router.post('/getSortData',function(req,res,next){
     var querydata = req.body.selectSortpicker;
     console.log("Heloo "+ req.body.selectSortpicker);
+    if(querydata == "sbli"){
+        Product.find({}).sort({ProductAddDate : -1}).then(docs => {
+          category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+            console.log(categorydocs);
+            if(categorydocs)
+            {
+              
+              res.render("admin/product", {
+                list:docs ,
+                categorydetails:categorydocs
+              });
+            }
+          });
+        })
+    }
     if(querydata == "htl"){
         Product.find({}).sort({price : -1}).then(docs => {
             category.find({}).sort({categoryName : 1}).then(categorydocs =>{
@@ -316,6 +331,7 @@ router.post('/checkout', auth.isLoggedIn,function(req, res, next){
             cart: cart,
             addres: req.body.address,
             name: req.body.name,
+            orderOn: new Date(),
             paymentId: charge.id
         });
         order.save(function(err, result){

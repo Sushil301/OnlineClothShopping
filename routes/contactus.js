@@ -53,7 +53,7 @@ router.post('/contactus' ,function(req, res, next) {
                 smtpTransport.sendMail(mailOptions, function(error, response){
                     if(error){
                         console.log(error);
-                         res.end("error");
+                         res.end("error " + error);
                     }else{
                         console.log("Message sent: " + response.message);
                         res.redirect('/');

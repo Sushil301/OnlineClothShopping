@@ -19,18 +19,21 @@
     "express-session": "^1.17.0",
     "express-validator": "^2.21.0",
     "fs": "0.0.1-security",
-    "hbs": "~4.0.4",
+    "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "mongodb": "^3.5.4",
     "mongoose": "^5.8.3",
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
-    "nodemailer": "^6.4.4",
+    "nodemailer": "^6.4.6",
     "passport": "^0.3.2",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "random-number": "0.0.9",
     "stripe": "^7.15.0"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0"
   }
 }

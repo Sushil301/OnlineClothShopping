@@ -2,19 +2,21 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var passport = require('passport');
-var auth = require('../config/auth');
 var multer = require('multer');
 var path = require('path');
-var Product = require('../models/product');
 var fs = require('fs');
 var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
 var session = require('express-session');
 
+var auth = require('../config/auth');
+var Product = require('../models/product');
 var category = require('../models/category');
 var Discount = require('../models/discount');
-
+var user = require('../models/user');
+var contactus = require('../models/contactus');
+var order = require('../models/order');
 
 var url = 'mongodb://localhost:27017/OCM';
 
@@ -41,7 +43,7 @@ router.get('/addproduct', auth.isAdmin ,function(req, res, next) {
      cb(null, 'D:/Study/OCM/public/images/productImage');
    },
    filename: function (req, file, cb) {
-     cb(null, req.body.productType +'_' + req.body.productName + path.extname(file.originalname));
+     cb(null, req.body.productType+'_'+req.body.productName+path.extname(file.originalname));
    }
  });
  var upload = multer({ storage:storage});
@@ -57,6 +59,7 @@ router.get('/addproduct', auth.isAdmin ,function(req, res, next) {
      prod.size = req.body.size;
      prod.price = req.body.price;
      prod.description = req.body.description;
+     prod.ProductAddDate = new Date();
      prod.save((err,docs)=>{
        if(!err){
          res.render('shop/index', { title: 'Product Added' });
@@ -217,7 +220,21 @@ router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
 
 router.post('/getSortData',function(req,res,next){
   var querydata = req.body.selectSortpicker;
-  console.log("Heloo "+ req.body.selectSortpicker);
+  if(querydata == "sbli"){
+    Product.find({}).sort({ProductAddDate : -1}).then(docs => {
+      category.find({}).sort({categoryName : 1}).then(categorydocs =>{
+        console.log(categorydocs);
+        if(categorydocs)
+        {
+          
+          res.render("admin/product", {
+            list:docs ,
+            categorydetails:categorydocs
+          });
+        }
+      });
+    })
+}
   if(querydata == "htl"){
       Product.find({}).sort({price : -1}).then(docs => {
         category.find({}).sort({categoryName : 1}).then(categorydocs =>{
@@ -289,10 +306,103 @@ function insertDiscount(req,res ){
  }
 }
 
+router.get('/contactus',auth.isAdmin, function(req, res, next) {
+  contactus.find((err,contactdetails)=>{
+    if(!err){
+      res.render('admin/contactus',{contactdetails:contactdetails});
+    }
+    else{
+      console.log("Error in contact us : "+ err);
+    }
+  });
+});
+
 
 router.get('/reports',auth.isAdmin, function(req, res, next) {
   res.render('admin/reports');
  });
+
+ router.post('/reports',auth.isAdmin, function(req, res, next) {
+  if(req.body.selectreportpicker == "tnou"){
+    user.count((err,docs) => {
+      if(!err){
+        user.find((usererr,userlist)=>{
+          if(!usererr){
+            res.render('admin/reports',
+              {totalnumofusers: docs,
+                userlist:userlist
+              }
+            );
+          }
+          else{
+            console.log("Error in user list : "+usererr);
+          }
+        });
+        
+      }
+      else{
+        console.log("Error : "+ err);
+      }
+    })
+  }
+  if(req.body.selectreportpicker == "totalprod"){
+    Product.count((err,proddocs) => {
+      if(!err){
+        Product.find((proderr,prodlist)=>{
+          if(!proderr){
+            res.render('admin/reports',
+            {totalnumofproduct: proddocs,
+              prodlist:prodlist
+            }
+            );
+          }
+          else{
+            console.log("Error in Product list : "+ proderr);
+          }
+        });
+       
+      }
+      else{
+        console.log("Error : "+ err);
+      }
+    })
+  }
+  if(req.body.selectreportpicker == "totalsold"){
+    order.countDocuments((err,orderdocs) => {
+      if(!err){
+        order.find((ordererr,orderlist)=>{
+          if(!ordererr){
+            // user.findById({_id:user},(usererr,data)=>{
+            //   if(!usererr){
+            //     console.log("Data : "+data);
+              
+            //   }
+            //   else{
+            //     console.log("Error " +usererr);
+            //   }
+            // });
+            res.render('admin/reports',
+              {totalnumoforder: orderdocs,
+                orderlist:orderlist
+              }
+            );
+          }
+          else{
+            console.log("Error in Product list : "+ proderr);
+          }
+        });
+       
+      }
+      else{
+        console.log("Error : "+ err);
+      }
+    })
+  }
+  
+  
+ });
+
+ 
 
 
 module.exports = router;

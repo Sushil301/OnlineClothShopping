@@ -72,12 +72,14 @@
                                      
                                         {{#if currentUser.isAdmin}}
                                             <li><a href="/admin/product">SHOP</a></li>
+                                            <li><a href="/admin/contactus">CONTACT</a></li>
+
 
                                         {{else}}
-                                             <li><a href="/shop">SHOP</a></li>
-
+                                            <li><a href="/shop">SHOP</a></li>
+                                            <li><a href="/contact/contactus">CONTACT</a></li>
                                         {{/if}}
-                                        <li><a href="/contact/contactus">CONTACT</a></li>
+                                       
                                         <li><a href="/aboutus">ABOUT US</a></li>
                                         {{#if currentUser.isAdmin}}
 

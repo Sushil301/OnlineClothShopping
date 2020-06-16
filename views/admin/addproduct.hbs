@@ -36,8 +36,9 @@
                              <tr>
                                 <th><label>Category : </label></th>
                                 <td> <select class="form-control" name="productType">
+                                  
                                   {{#each categorydetails }}
-                                  <option value="{{ this._id }}">{{ this.categoryName }}</option>
+                                  <option value="{{ this.categoryName }}">{{ this.categoryName }}</option>
                                   {{/each}}
                                   </select></td>
                             </tr>

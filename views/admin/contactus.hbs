@@ -1,0 +1,31 @@
+ <div class="col-sm-12">
+    <div id="products" class="row">
+        <table id="dtBasicExample" class="table" width="100%">
+            <thead>
+                <tr>
+                <th class="th-sm">Full Name</th>
+                <th class="th-sm">Email id</th>
+                <th class="th-sm">Subject</th>
+                <th class="th-sm">Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {{#each contactdetails}}
+                    <td>{{this.Full_name}}</td>
+                    <td>{{this.Email}}</td>
+                    <td>{{this.Subject}}</td>
+                    <td>{{this.Message}}</td>
+
+                    {{/each}}
+                </tr>
+                <tr>
+                    <th class="th-sm">Full Name</th>
+                    <th class="th-sm">Email id</th>
+                    <th class="th-sm">Subject</th>
+                    <th class="th-sm">Message</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

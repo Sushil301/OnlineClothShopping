@@ -31,82 +31,7 @@
                 </div>
             </div>
         </section>
-        <!--Breadcumb area end here-->
-        <!--Recommanded products area start here-->
-        {{!-- <section class="recommended-products section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="recommended-con">
-                            <h4>Recommended Items for You</h4>
-                            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
-                            <a href="#" class="btn1">SEE COLLECTION</a>
-                        </div>
-                    </div>
-                    <div class="col-md-9 col-sm-8 col-xs-12 pd-0">
-                        <div class="recommended-slider">
-                            <div class="col-sm-12">
-                                <div class="product-list">
-                                    <figure>
-                                        <img src="/images/products/r1.jpg" alt=""/>
-                                    </figure>
-                                    <div class="content">
-                                        <h4><a href="#">Dark Scale T-Shirt</a> <span>$56</span></h4>
-                                        <p>Soft and comforting outwear</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="product-list">
-                                    <figure>
-                                        <img src="/images/products/r1.jpg" alt=""/>
-                                    </figure>
-                                    <div class="content">
-                                        <h4><a href="#">Dark Scale T-Shirt</a> <span>$56</span></h4>
-                                        <p>Soft and comforting outwear</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="product-list">
-                                    <figure>
-                                        <img src="/images/products/r1.jpg" alt=""/>
-                                    </figure>
-                                    <div class="content">
-                                        <h4><a href="#">Dark Scale T-Shirt</a> <span>$56</span></h4>
-                                        <p>Soft and comforting outwear</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="product-list">
-                                    <figure>
-                                        <img src="/images/products/r1.jpg" alt=""/>
-                                    </figure>
-                                    <div class="content">
-                                        <h4><a href="#">Dark Scale T-Shirt</a> <span>$56</span></h4>
-                                        <p>Soft and comforting outwear</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="product-list">
-                                    <figure>
-                                        <img src="/images/products/r1.jpg" alt=""/>
-                                    </figure>
-                                    <div class="content">
-                                        <h4><a href="#">Dark Scale T-Shirt</a> <span>$56</span></h4>
-                                        <p>Soft and comforting outwear</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-        <!--Recommanded products area end here-->
-        <!--Product page area start here-->
+       
         <section class="products-page section">
             <div class="container">
                 <div class="row">
@@ -120,8 +45,8 @@
                                     <ul>
                                         {{#each categorydetails }}
                                         
-                                        <li><a href="/categorywiseproduct/{{ this.categoryName }}"><span><i class="fa fa-anchor"></i></span>{{ this.categoryName }}</a></li>
-                                      
+                                        <li><a href="/categorywiseproduct/{{ this.categoryName }}"></i></span>{{ this.categoryName }}</a></li>
+                     
                                         {{/each}}
                                     </ul>
                                 </div>
@@ -141,18 +66,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="widget">
-                                <div class="heading">
-                                    <h4>Price range</h4>
-                                </div>
-                                <div class="price-range">
-                                    <div class="range">
-                                        <div id="range-price" class="range-box"></div>
-                                        <span>Range :</span><input type="text" id="price" class="price-box" readonly/>
-                                    </div>
-                                    <button type="submit">FILTER</button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-12 pd-0">
@@ -172,7 +86,7 @@
                                     <form id="tableForm" action="/getSortData" method="POST">
                                         <select class="selectpicker" data-style="btn-info" name="selectSortpicker">
                                             
-                                                <option value=""> SORT BY LATEST ITEM</option>
+                                                <option value="sbli"> SORT BY LATEST ITEM</option>
                                                 <option value=""> new ITEM</option>
                                                 <option value="lth">Price Low to High</option>
                                                 <option value="htl">Price High to Low</option>
