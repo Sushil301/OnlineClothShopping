@@ -21,9 +21,10 @@ router.use(function (req, res, next) {
 });
 router.post('/editProfile',auth.isLoggedIn, function(req, res, next) { 
     if(req.body.updateprofile){
+        
         user.findByIdAndUpdate(req.body._id, req.body,{new:true}, (err, doc) => {
             if (!err) {
-            //  console.log('updated');
+                console.log('updated');
                 res.redirect('/');
             }
             else{
@@ -207,7 +208,7 @@ router.post('/getSortData',function(req,res,next){
             if(categorydocs)
             {
               
-              res.render("admin/product", {
+              res.render("Shop/shop-recommend", {
                 list:docs ,
                 categorydetails:categorydocs
               });
@@ -314,6 +315,7 @@ router.post('/checkout', auth.isLoggedIn,function(req, res, next){
             return res.redirect('/checkout');
         }
         if(req.body.savedata){
+            
             console.log(req.user._id);
             user.findByIdAndUpdate(req.user._id,
                 {$set:{ address: req.body.address,

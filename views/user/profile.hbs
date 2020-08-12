@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h1>User Profile</h1>
@@ -20,11 +22,11 @@
             <input type="Number" id="pincode" value="{{this.pincode}}" name="pincode" minlength="6" maxlength="6" style="width: 300px;"  class="form-control"><br>
             
             <label for="Contact Number">Contact Numebr</label>
-            <input type="Number" id="Contact Number" value="{{this.contactNumber}}" name="contactNumber" minlength="10" maxlength="10" style="width: 300px;"  class="form-control"><br>
+            <input type="Number" id="contactNumber" value="{{this.contactNumber}}" name="contactNumber" minlength="10" maxlength="10" style="width: 300px;"  class="form-control"><br>
     
             <input type="hidden" name="_id" value="{{this._id}}">
 
-            <input type="submit" class="btn-st rd-30" name="updateprofile" value="Update Profile">
+            <input type="submit" class="btn-st rd-30" name="updateprofile" value="Update Profile" onclick="return validationForm()">
             <input type="submit" class="btn-st rd-30" name="changepassword" value="Change Password">
 
         </form>
@@ -97,4 +99,21 @@
         {{/if}}
         
     </div>
+    
 </div>
+
+<script>
+function validationForm() {
+    var cnum = document.getElementById("contactNumber").value;
+    var phoneNum = /^[6-9]\d{9}$/; 
+            if(cnum.match(phoneNum)) {
+               
+                return true;
+            }
+            else {
+               alert("Invalid Number");
+               return false;
+            }
+ 
+}
+</script>

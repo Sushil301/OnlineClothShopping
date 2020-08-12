@@ -34,8 +34,23 @@
                         <textarea  id="Message" class="form-control" name="message" required='required'></textarea>
 					</div><br>
 					
-                    <input type="submit" class="btn-st rd-30" name="send" value="Send"/>
+                    <input type="submit" class="btn-st rd-30" name="send" value="Send" onclick="return validationForm"/>
 				</form>
 			</div>
 		</div>
 </div>
+<script>
+function validationForm() {
+    var cnum = document.getElementById("contactNumber").value;
+    var phoneNum = /^[6-9]\d{9}$/; 
+            if(cnum.match(phoneNum)) {
+               
+                return true;
+            }
+            else {
+               alert("Invalid Number");
+               return false;
+            }
+ 
+}
+</script>

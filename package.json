@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "alert-node": "^3.0.11",
     "assert": "^2.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",

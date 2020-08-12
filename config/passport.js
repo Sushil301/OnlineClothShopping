@@ -136,7 +136,7 @@ passport.use('local.signin', new LocalStrategy({
         if (!user.validPassword(password)){
             return done(null, false, {message: 'Wrong User Name and Password'});
         }
-    req.session.emailid = email;
+        req.session.emailid = email;
        return done(null, user);
     });
 }));

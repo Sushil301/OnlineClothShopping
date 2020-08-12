@@ -219,7 +219,7 @@ router.post('/forgotPassword', function(req, res, next) {
             }                 
         });
         req.logout();
-        res.render('shop/index');
+        res.render('shop/index',{succ:true});
     }   
     else{
         console.log("Invalid Link")

@@ -181,6 +181,7 @@ router.post('/addcategory',auth.isAdmin,function(req,res,next){
 });
 
 function insertCategory(req,res ){
+  
   var cate = new category();
   cate.categoryName = req.body.categoryName;
   cate.save((err,docs)=>{
@@ -189,7 +190,8 @@ function insertCategory(req,res ){
       console.log('Inserted');
     }
     else{
-      console.log('Error');
+      res.render('admin/addcategory', { title: 'category Added' ,err:"true"});
+      console.log('Category already exists\n please insert new category');
     }
   });
 }
@@ -218,7 +220,7 @@ router.get('/categorywiseproduct/:name',auth.isAdmin, function(req, res, next) {
 });
 
 
-router.post('/getSortData',function(req,res,next){
+router.post('/getSortData',auth.isAdmin,function(req,res,next){
   var querydata = req.body.selectSortpicker;
   if(querydata == "sbli"){
     Product.find({}).sort({ProductAddDate : -1}).then(docs => {
